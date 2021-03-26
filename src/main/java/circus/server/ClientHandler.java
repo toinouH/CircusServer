@@ -1,4 +1,4 @@
-package club.marlo.circus.server;
+package circus.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,6 +25,7 @@ public class ClientHandler implements Runnable {
                 String request = input.readLine();
                 if (request.contains("create_match")) {
                     output.println("Creating match...");
+                    System.out.println(request);
                     // TODO: Handle lobby creation.
                 } else {
                     output.println("Unrecognized input.");

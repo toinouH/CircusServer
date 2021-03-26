@@ -1,4 +1,4 @@
-package club.marlo.circus.server;
+package circus.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
