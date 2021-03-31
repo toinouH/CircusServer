@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CircusServer" target="16" />
+      <module name="CircusServer" target="15" />
     </bytecodeTargetLevel>
   </component>
 </project>

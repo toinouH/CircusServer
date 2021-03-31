@@ -18,7 +18,7 @@ public class Api {
     public Player getPlayer( int id ) throws IOException {
         Request request = new Request.Builder().url( API_URL + "plans/" + id + "/" ).build();
 
-        try ( Response response = this.httpClient.newCall(request).execute() ) {
+        try ( Response response = this.httpClient.newCall( request ).execute() ) {
             Player player = gson.fromJson( response.body().string(), Player.class );
             return player;
         } catch ( NullPointerException e ) {
