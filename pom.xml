@@ -16,9 +16,12 @@
 
     <repositories>
         <repository>
-            <id>OpenCV</id>
-            <name>OpenCV Repo</name>
-            <url>http://maven.icm.edu.pl/artifactory/repo/</url>
+            <id>SimpleNativeHooks-maven-export</id>
+            <url>https://raw.github.com/repeats/SimpleNativeHooks/maven-export/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
     <dependencies>
@@ -50,6 +53,17 @@
             <groupId>org.openpnp</groupId>
             <artifactId>opencv</artifactId>
             <version>[4.3.0,)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.repeats.simplenativehooks</groupId>
+            <artifactId>simplenativehooks</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>5.8.0</version>
         </dependency>
     </dependencies>
     <build>

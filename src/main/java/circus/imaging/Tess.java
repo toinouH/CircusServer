@@ -13,6 +13,7 @@ public class Tess {
 
     public Tess() {
         this.tesseract.setDatapath(this.TESS_DATA);
+        this.tesseract.setTessVariable("user_defined_dpi", "70");
     }
 
     public String readBufferedImage(BufferedImage input) throws TesseractException {

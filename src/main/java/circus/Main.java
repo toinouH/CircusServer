@@ -1,11 +1,7 @@
 package circus;
 
 
-import circus.api.Api;
-import circus.api.Player;
-import circus.imaging.Imaging;
 import circus.imaging.Tess;
-import circus.server.Server;
 import net.sourceforge.tess4j.TesseractException;
 import org.opencv.core.Core;
 
@@ -20,21 +16,27 @@ public class Main {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
         // Instantiate necessary objects prior to moving forward
-        Imaging imaging = new Imaging();
         Tess tess = new Tess();
+        StateHandler stateHandler = new StateHandler();
 
-        System.out.println(tess.readBufferedImage(imaging.captureMenuPlayButton()));
-        Thread.sleep(3000);
-        System.out.println(tess.readBufferedImage(imaging.captureFindGroupButton()));
+        while (true) {
+            try {
+                stateHandler.getCurrentState().goNextState();
+            } catch (NullPointerException e) {
+                System.out.println("We've reached the end of the road..");
+            }
+            Thread.sleep(10);
+        }
+
 
         // Testing of converting api responses to Player object
-        Api api = new Api();
-        Player playerWithIdOfFour = api.getPlayer( 4 );
-        System.out.println( String.format( "%s has a rating of %s.",
-                playerWithIdOfFour.getName(),
-                playerWithIdOfFour.getRating()) );
-
+//        Api api = new Api();
+//        Player playerWithIdOfFour = api.getPlayer( 4 );
+//        System.out.println( String.format( "%s has a rating of %s.",
+//                playerWithIdOfFour.getName(),
+//                playerWithIdOfFour.getRating()) );
+//
         // Testing server
-        Server server = new Server();
+//        Server server = new Server();
     }
 }

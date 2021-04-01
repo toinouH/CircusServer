@@ -27,6 +27,7 @@ public class ClientHandler implements Runnable {
                     output.println("Creating match...");
                     System.out.println(request);
                     // TODO: Handle lobby creation.
+
                 } else {
                     output.println("Unrecognized input.");
                 }
