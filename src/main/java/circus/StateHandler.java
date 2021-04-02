@@ -13,7 +13,8 @@ public class StateHandler {
     private Imaging imaging = new Imaging();
     private boolean hasMovedBot = false;
     private boolean hasSetPreset = false;
-    private boolean isWaitingForPlayers = false;
+    private boolean hasInvitedPlayers = false;
+    private boolean isWaitingForPlayers = true;
 
     public State getCurrentState() throws IOException, AWTException, TesseractException {
         if (tess.readBufferedImage(imaging.captureMenuPlayButton())
@@ -44,12 +45,19 @@ public class StateHandler {
             if (!this.hasMovedBot) {
                 this.hasMovedBot = true;
                 return State.MAIN_LOBBY_MENU_MOVE_SPEC;
-            } else if (!this.hasSetPreset) {
+            }
+
+            if (!this.hasSetPreset) {
                 this.hasSetPreset = true;
                 return State.MAIN_LOBBY_MENU_SET_PRESET;
-            } else {
-                return State.MAIN_LOBBY_WAITING_FOR_PLAYERS;
             }
+
+            if (!this.hasInvitedPlayers) {
+                this.hasInvitedPlayers = true;
+                return State.MAIN_LOBBY_INVITE_PLAYERS;
+            }
+
+            return State.MAIN_LOBBY_WAITING_FOR_PLAYERS;
         }
 
 

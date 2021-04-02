@@ -15,13 +15,13 @@ import java.io.IOException;
 
 public class Imaging {
 
-    private Position MENU_PLAY_BUTTON = new Position(34, 200, 150, 95, 600, 300);
-    private Position FIND_GROUP_BUTTON = new Position(885, 920, 145, 40, 600, 200);
-    private Position FILTER_GAMES_BUTTON = new Position(1116, 204, 80, 40, 600, 200);
-    private Position START_MATCH_BUTTON = new Position(872, 883, 100, 60, 600, 200);
-    private Position MOVE_AND_DONE_BUTTON = new Position(1339, 323, 100, 80, 300, 150);
-    private Position BLUE_TEAM_LOBBY_START = new Position(291, 461, 100, 80, 300, 150);
-    private Position CIRCUS_PRESET_1 = new Position(123, 261, 250, 100, 300, 150);
+    private final Position MENU_PLAY_BUTTON = new Position(34, 200, 150, 95, 600, 300);
+    private final Position FIND_GROUP_BUTTON = new Position(885, 920, 145, 40, 600, 200);
+    private final Position FILTER_GAMES_BUTTON = new Position(1116, 204, 80, 40, 600, 200);
+    private final Position START_MATCH_BUTTON = new Position(872, 883, 100, 60, 600, 200);
+    private final Position MOVE_AND_DONE_BUTTON = new Position(1339, 323, 100, 80, 300, 150);
+    private final Position BLUE_TEAM_LOBBY_START = new Position(291, 461, 100, 80, 300, 150);
+    private final Position CIRCUS_PRESET_1 = new Position(123, 261, 250, 100, 300, 150);
 
     private static Mat BufferedImage2Mat(BufferedImage image) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

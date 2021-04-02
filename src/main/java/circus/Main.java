@@ -1,6 +1,8 @@
 package circus;
 
 
+import circus.api.Api;
+import circus.api.Match;
 import circus.imaging.Tess;
 import net.sourceforge.tess4j.TesseractException;
 import org.opencv.core.Core;
@@ -30,7 +32,6 @@ public class Main {
 
 
         // Testing of converting api responses to Player object
-//        Api api = new Api();
 //        Player playerWithIdOfFour = api.getPlayer( 4 );
 //        System.out.println( String.format( "%s has a rating of %s.",
 //                playerWithIdOfFour.getName(),

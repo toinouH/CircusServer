@@ -12,8 +12,6 @@ public class Api {
     private Gson gson = new Gson();
 
     private static final String API_URL = "https://rankedcircus.com/api/";
-    private static final String API_PLAYERS = API_URL + "players/";
-    private static final String API_MATCHES = API_URL + "matches/";
 
     public Player getPlayer( int id ) throws IOException {
         Request request = new Request.Builder().url( API_URL + "plans/" + id + "/" ).build();
@@ -23,6 +21,20 @@ public class Api {
             return player;
         } catch ( NullPointerException e ) {
             throw new NullPointerException( "Could not find player with id of " + id );
+        }
+    }
+
+    public Match getMatch(int id) throws IOException {
+        Request request = new Request
+                .Builder()
+                .url(String.format("%smatches/%d/", API_URL, id))
+                .build();
+
+        try (Response response = this.httpClient.newCall(request).execute()) {
+            Match match = gson.fromJson(response.body().string(), Match.class);
+            return match;
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Couldn't find match with the id of " + id);
         }
     }
 }
