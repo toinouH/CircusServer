@@ -14,7 +14,8 @@ public enum State {
     MAIN_LOBBY_MENU_MOVE_SPEC(new ActionMoveToSpec()),
     MAIN_LOBBY_MENU_SET_PRESET(new ActionSetPreset()),
     MAIN_LOBBY_WAITING_FOR_PLAYERS(new ActionWaitingForPlayers()),
-    MAIN_LOBBY_INVITE_PLAYERS(new ActionInvitePlayers());
+    MAIN_LOBBY_INVITE_PLAYERS(new ActionInvitePlayers()),
+    WAITING_FOR_GAME(new ActionWaitingForGame());
 //    MOVE_BOT_SPEC(364, 473, true),
 //    MOVE_BOT_SPEC_LIST(1428, 468, true),
 //    MOVE_BOT_SPEC_DONE(1409, 309, true),

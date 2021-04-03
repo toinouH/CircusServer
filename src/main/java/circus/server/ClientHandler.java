@@ -10,9 +10,11 @@ public class ClientHandler implements Runnable {
     private Socket client;
     private BufferedReader input;
     private PrintWriter output;
+    private MatchServer serverReference;
 
-    public ClientHandler(Socket clientSocket) throws IOException {
+    public ClientHandler(Socket clientSocket, MatchServer serverReference) throws IOException {
         this.client = clientSocket;
+        this.serverReference = serverReference;
         input  = new BufferedReader(new InputStreamReader(client.getInputStream()));
         output = new PrintWriter(client.getOutputStream(), true);
     }
@@ -23,17 +25,24 @@ public class ClientHandler implements Runnable {
         try {
             while (true) {
                 String request = input.readLine();
-                if (request.contains("create_match")) {
-                    output.println("Creating match...");
-                    System.out.println(request);
-                    // TODO: Handle lobby creation.
+                if (request != null && request.contains("create_match id=")) {
+                    int matchId = Integer.parseInt(request
+                            .split("create_match id=")[1]
+                            .split("\\\\")[0]);
+
+                    System.out.println("[MatchServer] DRAFT_NODE_1 says \"" + request + "\"");
+                    System.out.println("[MatchServer] Creating new match with id of " + matchId);
+
+                    this.serverReference
+                            .getStateHandler()
+                            .setCurrentMatchId(Integer.parseInt(request.split("create_match id=")[1]));
 
                 } else {
                     output.println("Unrecognized input.");
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getStackTrace());
+            e.getStackTrace();
         } finally {
             output.close();
             try {

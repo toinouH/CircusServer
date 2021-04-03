@@ -1,34 +1,33 @@
 package circus.actions;
 
 import circus.CFunctions;
-import circus.api.Api;
-import circus.api.Match;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ActionInvitePlayers extends Action {
-    private Api api = new Api();
     private Robot robot;
 
     public ActionInvitePlayers() {
         this.name = "InvitePlayers";
         try {
             this.robot = new Robot();
-            this.robot.setAutoDelay(50);
+            this.robot.setAutoDelay(5);
         } catch (AWTException e) {
             e.printStackTrace();
         }
     }
 
-    private void inviteTeam(ArrayList<String> players) {
+    public ActionInvitePlayers inviteTeam(ArrayList<String> players, int team) {
         for (String player : players) {
             try {
                 CFunctions.clickPos(1654, 314);
                 CFunctions.clickPos(900, 786);
-                CFunctions.clickPos(866, 896);
+                if (team == 1)
+                    CFunctions.clickPos(866, 896);
+                if (team == 2)
+                    CFunctions.clickPos(824, 926);
                 Thread.sleep(100);
                 CFunctions.clickPos(1234, 305);
                 Thread.sleep(200);
@@ -55,18 +54,10 @@ public class ActionInvitePlayers extends Action {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
+        return this;
     }
 
     @Override
-    public void execute() {
-        try {
-            Match match = api.getMatch(1);
-            inviteTeam(match.getBlueTeam());
-            inviteTeam(match.getRedTeam());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public void execute() { }
 }

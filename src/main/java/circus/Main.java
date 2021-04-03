@@ -1,43 +1,22 @@
 package circus;
 
-
-import circus.api.Api;
-import circus.api.Match;
-import circus.imaging.Tess;
-import net.sourceforge.tess4j.TesseractException;
+import circus.server.MatchServer;
 import org.opencv.core.Core;
 
-
-import java.awt.*;
 import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, AWTException, TesseractException, InterruptedException {
+    public static void main(String[] args) throws IOException {
         // Load the OpenCV dll
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-        // Instantiate necessary objects prior to moving forward
-        Tess tess = new Tess();
         StateHandler stateHandler = new StateHandler();
+        Thread stateHandlerThread = new Thread(stateHandler);
+        stateHandlerThread.start();
 
-        while (true) {
-            try {
-                stateHandler.getCurrentState().goNextState();
-            } catch (NullPointerException e) {
-                System.out.println("We've reached the end of the road..");
-            }
-            Thread.sleep(10);
-        }
-
-
-        // Testing of converting api responses to Player object
-//        Player playerWithIdOfFour = api.getPlayer( 4 );
-//        System.out.println( String.format( "%s has a rating of %s.",
-//                playerWithIdOfFour.getName(),
-//                playerWithIdOfFour.getRating()) );
-//
-        // Testing server
-//        Server server = new Server();
+        MatchServer server = new MatchServer(stateHandler);
+        Thread matchServerThread = new Thread(server);
+        matchServerThread.start();
     }
 }
