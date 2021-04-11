@@ -46,8 +46,25 @@ public class Match {
         this.id = id;
     }
 
-    public String getMap() {
-        return map;
+    // This is ass this is not going live this is going to be nuked just needed to check concept
+    public int getMap() {
+        System.out.println("[MatchServer] Setting match.currentMap to " + this.map);
+        switch (this.map.toLowerCase()) {
+            case "king's row":
+                return 19;
+            case "busan":
+                return 1;
+            case "illios":
+                return 2;
+            case "nepal":
+                return 5;
+            case "lijiang tower":
+                return 3;
+            case "watchpoint: gibraltar":
+                return 12;
+            default:
+                return 25;
+        }
     }
 
     public void setMap(String map) {

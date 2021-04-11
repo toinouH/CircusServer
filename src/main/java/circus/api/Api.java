@@ -24,7 +24,7 @@ public class Api {
         }
     }
 
-    public Match getMatch(int id) throws IOException {
+    public Match getMatch(int id) {
         Request request = new Request
                 .Builder()
                 .url(String.format("%smatches/%d/", API_URL, id))
@@ -35,6 +35,9 @@ public class Api {
             return match;
         } catch (NullPointerException e) {
             throw new NullPointerException("Couldn't find match with the id of " + id);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        throw new IllegalArgumentException("Match with id of " + id + " does not exist.");
     }
 }

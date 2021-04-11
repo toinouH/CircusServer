@@ -1,7 +1,6 @@
 package circus;
 
 import circus.actions.*;
-import circus.imaging.Imaging;
 
 import java.awt.*;
 
@@ -13,19 +12,10 @@ public enum State {
     GAME_BROWSER_MENU(new ActionCreateLobby()),
     MAIN_LOBBY_MENU_MOVE_SPEC(new ActionMoveToSpec()),
     MAIN_LOBBY_MENU_SET_PRESET(new ActionSetPreset()),
+    MAIN_LOBBY_MENU_SET_MAP(new ActionSetMap()),
     MAIN_LOBBY_WAITING_FOR_PLAYERS(new ActionWaitingForPlayers()),
     MAIN_LOBBY_INVITE_PLAYERS(new ActionInvitePlayers()),
     WAITING_FOR_GAME(new ActionWaitingForGame());
-//    MOVE_BOT_SPEC(364, 473, true),
-//    MOVE_BOT_SPEC_LIST(1428, 468, true),
-//    MOVE_BOT_SPEC_DONE(1409, 309, true),
-//    SETTINGS_MAIN_MENU(1428, 468, true);
-//    SETTINGS_PRESETS_MENU,
-//    SETTINGS_LOBBY_MENU,
-//    SETTINGS_MAPS_MENU,
-//    SETTINGS_HEROES_MENU,
-//    SETTINGS_MODES_MENU,
-//    SETTINGS_WORKSHOP_MENU;
 
     private Action action;
     private Mouse mouse;
@@ -42,7 +32,7 @@ public enum State {
 
     public void goNextState() throws InterruptedException {
         this.action.execute();
-        Thread.sleep(250);
+        Thread.sleep(50);
     }
 
     public Mouse getMouse () { return this.mouse; }

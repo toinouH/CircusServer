@@ -22,7 +22,7 @@ public class ActionSetPreset extends Action {
         for (ActionPoint ap : this.queue) {
             CFunctions.clickPos(ap.getX(), ap.getY());
             try {
-                Thread.sleep(1500);
+                Thread.sleep(2100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -16,6 +16,7 @@ public abstract class Action {
         for (ActionPoint ap : queue) {
             CFunctions.clickPos(ap.getX(), ap.getY());
         }
-        System.out.println(String.format("[MatchServer] Executed Action%s", this.name));
+
+        System.out.println(String.format("[MatchServer] Executing Action%s", this.name));
     }
 }
