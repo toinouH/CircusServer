@@ -18,7 +18,7 @@ public class ActionSetMap extends Action {
 
         try {
             this.robot = new Robot();
-            this.robot.setAutoDelay(25);
+            this.robot.setAutoDelay(55);
         } catch (AWTException e) {
             e.printStackTrace();
         }
@@ -41,6 +41,7 @@ public class ActionSetMap extends Action {
         this.robot.keyPress(KeyEvent.VK_DOWN);
         this.robot.keyRelease(KeyEvent.VK_DOWN);
 
+        // TODO: Abstract keyPress/keyRelease so we don't have to manually delay each press
         for (int i = 1; i <= this.map.getId() - 1; i++) {
             this.robot.keyPress(KeyEvent.VK_DOWN);
             this.robot.keyRelease(KeyEvent.VK_DOWN);

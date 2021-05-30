@@ -30,8 +30,8 @@ public class Imaging {
         return Imgcodecs.imdecode(new MatOfByte(byteArrayOutputStream.toByteArray()), Imgcodecs.IMREAD_UNCHANGED);
     }
 
-    private static BufferedImage Mat2BufferedImage(Mat matrix)throws IOException {
-        MatOfByte mob=new MatOfByte();
+    private static BufferedImage Mat2BufferedImage(Mat matrix) throws IOException {
+        MatOfByte mob = new MatOfByte();
         Imgcodecs.imencode(".jpg", matrix, mob);
         return ImageIO.read(new ByteArrayInputStream(mob.toArray()));
     }

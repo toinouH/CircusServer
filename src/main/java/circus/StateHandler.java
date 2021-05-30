@@ -41,25 +41,31 @@ public class StateHandler implements Runnable {
         try {
             if (tess.readBufferedImage(imaging.captureMenuPlayButton())
                     .toLowerCase()
-                    .contains("play")) {
+                    .contains("play"))
+            {
 
                 return State.MAIN_MENU;
             }
             if (tess.readBufferedImage(imaging.captureFindGroupButton())
                     .toLowerCase()
-                    .contains("group")) {
+                    .contains("group"))
+            {
 
                 return State.PLAY_MENU;
             }
+
             if (tess.readBufferedImage(imaging.captureFilterGamesButton())
                     .toLowerCase()
-                    .contains("filter")) {
+                    .contains("filter"))
+            {
 
                 return State.GAME_BROWSER_MENU;
             }
+
             if (tess.readBufferedImage(imaging.captureLobbyStartButton())
                     .toLowerCase()
-                    .contains("start")) {
+                    .contains("start"))
+            {
 
                 if (!this.hasMovedBot && this.currentMatchId != 0) {
                     this.hasMovedBot = true;

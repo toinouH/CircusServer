@@ -2,22 +2,15 @@ package circus.actions;
 
 
 public enum Map {
-    BUSAN(1, "Busan"),
-    ILIOS(2, "Ilios"),
-    LIJIANG_TOWER(3, "Lijiang_Tower"),
-    NEPAL(5, "Nepal"),
-    OASIS(6, "Oasis"),
-    DORADO(7, "Dorado"),
-    HAVANA(8, "Havan"),
-    JUNKERTOWN(9, "Junkertown"),
-    RIALTO(10, "Nepal"),
-    ROUTE_66(11, "Route_66"),
-    WATCHPOINT_GIBRALTAR(12, "Watchpoint_Gibraltar"),
-    BLIZZARD_WORLD(13, "Blizzard_World"),
-    EICHENWALDE(15, "Eichenwalde"),
-    HOLLYWOOD(17, "Hollywood"),
-    KINGS_ROW(19, "Kings_Row"),
-    NUMBANI(21, "Numbani");
+    HANAMURA(1, "Hanamura"),
+    HLC(3, "Horizon Lunar Colony"),
+    ANUBIS(5, "Temple of Anubis"),
+    VOLSKAYA(6, "Volskaya Industries"),
+    BUSAN(7, "Busan"),
+    ILIOS(8, "Ilios"),
+    LIJIANG(9, "Lijiang Tower"),
+    NEPAL(11, "Nepal"),
+    OASIS(12, "Oasis");
 
 
     private int id;

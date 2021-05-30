@@ -57,7 +57,7 @@ public class Match {
             case "illios":
                 return 2;
             case "nepal":
-                return 5;
+                return 11;
             case "lijiang tower":
                 return 3;
             case "watchpoint: gibraltar":

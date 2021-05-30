@@ -6,7 +6,7 @@ public class ActionGameBrowser extends Action{
     public ActionGameBrowser() {
         this.name = "GameBrowser";
         this.queue = new ArrayList<ActionPoint>() {{
-            add(new ActionPoint(1387, 470));
+            add(new ActionPoint(1285, 535));
         }};
     }
 }
