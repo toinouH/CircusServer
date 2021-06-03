@@ -47,23 +47,53 @@ public class Match {
     }
 
     // This is ass this is not going live this is going to be nuked just needed to check concept
-    public int getMap() {
+    public int getMap()
+    {
         System.out.println("[MatchServer] Setting match.currentMap to " + this.map);
-        switch (this.map.toLowerCase()) {
-            case "king's row":
-                return 19;
-            case "busan":
+        switch (this.map.toLowerCase())
+        {
+            case "hanamura":
                 return 1;
-            case "illios":
-                return 2;
+            case "horizon lunar colony":
+                return 3;
+            case "anubis":
+                return 5;
+            case "volskaya":
+                return 6;
+            case "busan":
+                return 7;
+            case "ilios":
+                return 8;
+            case "lijiang":
+                return 9;
             case "nepal":
                 return 11;
-            case "lijiang tower":
-                return 3;
-            case "watchpoint: gibraltar":
+            case "oasis":
                 return 12;
-            default:
+            case "dorado":
+                return 13;
+            case "havana":
+                return 14;
+            case "junkertown":
+                return 15;
+            case "rialto":
+                return 16;
+            case "route 66":
+                return 17;
+            case "watchpoint gibraltar":
+                return 18;
+            case "blizzard world":
+                return 19;
+            case "eichenwalde":
+                return 21;
+            case "hollywood":
+                return 23;
+            case "king's row":
                 return 25;
+            case "numbani":
+                return 27;
+            default:
+                return 20;
         }
     }
 

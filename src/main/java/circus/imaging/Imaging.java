@@ -13,7 +13,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class Imaging {
+public class Imaging
+{
 
     private final Position MENU_PLAY_BUTTON = new Position(34, 200, 150, 95, 600, 300);
     private final Position FIND_GROUP_BUTTON = new Position(885, 920, 145, 40, 600, 200);
@@ -23,20 +24,23 @@ public class Imaging {
     private final Position BLUE_TEAM_LOBBY_START = new Position(291, 461, 100, 80, 300, 150);
     private final Position CIRCUS_PRESET_1 = new Position(123, 261, 250, 100, 300, 150);
 
-    private static Mat BufferedImage2Mat(BufferedImage image) throws IOException {
+    private static Mat BufferedImage2Mat(BufferedImage image) throws IOException
+    {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", byteArrayOutputStream);
         byteArrayOutputStream.flush();
         return Imgcodecs.imdecode(new MatOfByte(byteArrayOutputStream.toByteArray()), Imgcodecs.IMREAD_UNCHANGED);
     }
 
-    private static BufferedImage Mat2BufferedImage(Mat matrix) throws IOException {
+    private static BufferedImage Mat2BufferedImage(Mat matrix) throws IOException
+    {
         MatOfByte mob = new MatOfByte();
         Imgcodecs.imencode(".jpg", matrix, mob);
         return ImageIO.read(new ByteArrayInputStream(mob.toArray()));
     }
 
-    private static BufferedImage imageScreen(Position position) throws AWTException, IOException {
+    private static BufferedImage imageScreen(Position position) throws AWTException, IOException
+    {
         // Construct rectangle of dimensions using position param
         Rectangle screenRect = new Rectangle(
                 position.getX(),

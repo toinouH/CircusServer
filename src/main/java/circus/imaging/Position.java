@@ -19,7 +19,8 @@ public class Position {
     int resizeW;
     int resizeH;
 
-    public Position(int x, int y, int width, int height, int resizeW, int resizeH) {
+    public Position(int x, int y, int width, int height, int resizeW, int resizeH)
+    {
         this.x = x;
         this.y = y;
         this.width = width;
