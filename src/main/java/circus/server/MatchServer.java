@@ -27,10 +27,13 @@ public class MatchServer implements Runnable {
     }
 
     @Override
-    public void run() {
-        try {
+    public void run()
+    {
+        try
+        {
             listener = new ServerSocket(PORT);
-            while (true) {
+            while (true) 
+            {
                 Socket client = listener.accept();
                 System.out.println("[MatchServer] New client connection instantiating...");
 
@@ -39,7 +42,8 @@ public class MatchServer implements Runnable {
 
                 clientPool.execute(clientThread);
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -1,7 +1,7 @@
 package circus.imaging;
 
-public class Position {
-
+public class Position
+{
     /**
      * Positions are used to store screen region coordinates for where image capturing.
      * Currently Positions also hold "resizeW" and "resizeH". I don't know think I want this to be the case

@@ -1,26 +1,37 @@
 package circus.actions;
 
 import circus.CFunctions;
+import circus.Keyboard;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class ActionInvitePlayers extends Action {
+public class ActionInvitePlayers extends Action
+{
+    // TODO: Make sure we actually need to instantiate this here.
+    // We might already have a reference to another Robot in another class that we can pass in.
     private Robot robot;
 
-    public ActionInvitePlayers() {
+    public ActionInvitePlayers()
+    {
         this.name = "InvitePlayers";
-        try {
+        try
+        {
             this.robot = new Robot();
             this.robot.setAutoDelay(5);
-        } catch (AWTException e) {
+        }
+        catch (AWTException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public ActionInvitePlayers inviteTeam(ArrayList<String> players, int team) {
+    // War crime function fix it
+    public ActionInvitePlayers inviteTeam(ArrayList<String> players, int team)
+    {
         for (String player : players) {
+            // Clean up sending clicks.
             try {
                 CFunctions.clickPos(1654, 314);
                 CFunctions.clickPos(900, 786);
@@ -31,24 +42,10 @@ public class ActionInvitePlayers extends Action {
                 Thread.sleep(100);
                 CFunctions.clickPos(1234, 305);
                 Thread.sleep(200);
-                for (char c : player.toCharArray()) {
-                    if (c == '#') {
-                        this.robot.keyPress(KeyEvent.VK_SHIFT);
-                        this.robot.keyPress('3');
-                        this.robot.keyRelease('3');
-                        this.robot.keyRelease(KeyEvent.VK_SHIFT);
-                    }
-                    if (Character.isUpperCase(c)) {
-                        this.robot.keyPress(KeyEvent.VK_SHIFT);
-                        this.robot.keyPress(c);
-                        this.robot.keyRelease(c);
-                        this.robot.keyRelease(KeyEvent.VK_SHIFT);
-                    } else {
-                        c = Character.toUpperCase(c);
-                        this.robot.keyPress(c);
-                        this.robot.keyRelease(c);
-                    }
-                }
+
+                // Iterate over every character in each battletag
+                Keyboard.sendString(this.robot, player);
+
                 CFunctions.clickPos(978, 859);
                 Thread.sleep(100);
             } catch (InterruptedException e) {

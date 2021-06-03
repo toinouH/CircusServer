@@ -15,7 +15,8 @@ import java.io.IOException;
 
 public class Imaging
 {
-
+    // Hard coded positions for 1920x1080.
+    // TODO: Provide config file support for smaller resolutions.
     private final Position MENU_PLAY_BUTTON = new Position(34, 200, 150, 95, 600, 300);
     private final Position FIND_GROUP_BUTTON = new Position(885, 920, 145, 40, 600, 200);
     private final Position FILTER_GAMES_BUTTON = new Position(1116, 204, 80, 40, 600, 200);

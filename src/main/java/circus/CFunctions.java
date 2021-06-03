@@ -3,6 +3,7 @@ package circus;
 public class CFunctions {
 
     static {
+        // TODO: Rename this lol.
         System.loadLibrary("ScreenLockBoner");
     }
 

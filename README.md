@@ -35,6 +35,20 @@ private void doSomething(Object something)
     // doing things
     // doing things
 }
+
+```
+While I respect your opinion to never dedicate entire lines to opening brackets, I don't care and it's wrong. Thank you.
+
+In addition, passing arguemnts should look like this:
+```
+// Don't do this
+call(arg1, arg2, arg3);
+
+// If you do this I'm suing you
+call(arg1,arg2,arg3);
+
+// Do this
+call( arg1, arg2, arg3 );
 ```
 
 The formatting in the project is currently inconsistent because I had a change of heart in the middle of development. As I come across things that do not follow my new-found fondness of as readable of code as possible, I will fix them. But I'm not going out of my way to each class to do so as of yet.
