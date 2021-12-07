@@ -9,7 +9,7 @@ public class ActionCreateLobby extends Action
     {
         this.name = "CreateLobby";
         this.queue = new ArrayList<ActionPoint>() {{
-            add(new ActionPoint(1719, 224));
+            add(new ActionPoint(1601, 226));
         }};
     }
 }

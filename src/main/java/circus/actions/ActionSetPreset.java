@@ -1,6 +1,6 @@
 package circus.actions;
 
-import circus.CFunctions;
+import circus.Mouse;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class ActionSetPreset extends Action {
         this.queue = new ArrayList<ActionPoint>() {{
             add(new ActionPoint(1538, 307));
             add(new ActionPoint(310, 327));
-            add(new ActionPoint(268, 311));
+            add(new ActionPoint(239, 353)); // 5th preset entry. TODO: Move this to local configuration file.
             add(new ActionPoint(1028, 661));
             add(new ActionPoint(1800, 1030));
             add(new ActionPoint(1800, 1030));
@@ -18,15 +18,17 @@ public class ActionSetPreset extends Action {
     }
 
     @Override
-    public void execute() {
+    public void execute()
+    {
         for (ActionPoint ap : this.queue) {
-            CFunctions.clickPos(ap.getX(), ap.getY());
+            Mouse.getInstance().moveThenClick(ap.getX(), ap.getY());
             try {
-                Thread.sleep(2100);
+                Thread.sleep(2100); // Blizzard server response time..
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println(String.format("[MatchServer] Server created. Waiting for players.", this.name));
+        System.out.println("[MatchServer] Server created. Waiting for players.");
+
     }
 }

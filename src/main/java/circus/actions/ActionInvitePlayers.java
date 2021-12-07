@@ -1,10 +1,9 @@
 package circus.actions;
 
-import circus.CFunctions;
 import circus.Keyboard;
+import circus.Mouse;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class ActionInvitePlayers extends Action
@@ -31,23 +30,33 @@ public class ActionInvitePlayers extends Action
     public ActionInvitePlayers inviteTeam(ArrayList<String> players, int team)
     {
         for (String player : players) {
+            System.out.println("Inviting " + player);
             // Clean up sending clicks.
-            try {
-                CFunctions.clickPos(1654, 314);
-                CFunctions.clickPos(900, 786);
+            try
+            {
+                System.out.println("Clicking invite");
+                Mouse.getInstance().moveThenClick(1654, 314);
+                System.out.println("Clicking team dropdown");
+                Thread.sleep(1000);
+                Mouse.getInstance().moveThenClick(700, 780);
+                System.out.println("Clicking team 1 or 2");
                 if (team == 1)
-                    CFunctions.clickPos(866, 896);
+                    Mouse.getInstance().moveThenClick(686, 882);
                 if (team == 2)
-                    CFunctions.clickPos(824, 926);
-                Thread.sleep(100);
-                CFunctions.clickPos(1234, 305);
-                Thread.sleep(200);
+                    Mouse.getInstance().moveThenClick(686, 925);
+                Thread.sleep(1000);
+                System.out.println("Clicking via battle-tag.");
+                Mouse.getInstance().moveThenClick(1200, 300);
+                Thread.sleep(1000);
 
                 // Iterate over every character in each battletag
+                System.out.println("Sending string");
                 Keyboard.sendString(this.robot, player);
 
-                CFunctions.clickPos(978, 859);
-                Thread.sleep(100);
+                System.out.println("Clicking invite");
+                Mouse.getInstance().moveThenClick(1000, 870);
+
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

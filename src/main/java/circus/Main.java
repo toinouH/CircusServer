@@ -2,11 +2,7 @@ package circus;
 
 import circus.server.MatchServer;
 import org.opencv.core.Core;
-
 import java.io.IOException;
-import java.awt.Robot;
-import java.awt.*;
-import java.lang.InterruptedException;
 
 public class Main
 {

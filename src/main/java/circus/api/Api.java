@@ -8,17 +8,17 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class Api {
-    private OkHttpClient httpClient = new OkHttpClient();
-    private Gson gson = new Gson();
+    private final OkHttpClient httpClient = new OkHttpClient();
+    private final Gson gson = new Gson();
 
-    private static final String API_URL = "https://rankedcircus.com/api/";
+//    private static final String API_URL = "https://rankedcircus.com/api/";
+    private static final String API_URL = "http://localhost:8000/api/";
 
     public Player getPlayer( int id ) throws IOException {
         Request request = new Request.Builder().url( API_URL + "plans/" + id + "/" ).build();
 
         try ( Response response = this.httpClient.newCall( request ).execute() ) {
-            Player player = gson.fromJson( response.body().string(), Player.class );
-            return player;
+            return gson.fromJson( response.body().string(), Player.class );
         } catch ( NullPointerException e ) {
             throw new NullPointerException( "Could not find player with id of " + id );
         }
@@ -31,8 +31,7 @@ public class Api {
                 .build();
 
         try (Response response = this.httpClient.newCall(request).execute()) {
-            Match match = gson.fromJson(response.body().string(), Match.class);
-            return match;
+            return gson.fromJson(response.body().string(), Match.class);
         } catch (NullPointerException e) {
             throw new NullPointerException("Couldn't find match with the id of " + id);
         } catch (IOException e) {

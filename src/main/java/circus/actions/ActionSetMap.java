@@ -1,6 +1,6 @@
 package circus.actions;
 
-import circus.CFunctions;
+import circus.Mouse;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -10,7 +10,8 @@ public class ActionSetMap extends Action {
     private Map map;
     private Robot robot;
 
-    public ActionSetMap() {
+    public ActionSetMap()
+    {
         this.name = "SetMap";
         this.queue = new ArrayList<ActionPoint>() {{
             new ActionPoint(1338, 207);
@@ -29,13 +30,14 @@ public class ActionSetMap extends Action {
         return this;
     }
 
-    public ActionSetMap changeMap() {
+    public ActionSetMap changeMap()
+    {
         // Lobby settings
-        CFunctions.clickPos(1533, 313);
+        Mouse.getInstance().moveThenClick(1533, 313);
         // Maps menu
-        CFunctions.clickPos(319, 541);
+        Mouse.getInstance().moveThenClick(319, 541);
         // None button
-        CFunctions.clickPos(1317, 204);
+        Mouse.getInstance().moveThenClick(1317, 204);
 
         // Starting at first map in list (Hanamura)
         this.robot.keyPress(KeyEvent.VK_DOWN);

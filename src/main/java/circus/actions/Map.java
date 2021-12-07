@@ -26,8 +26,8 @@ public enum Map {
     NUMBANI(     27,    "Numbani");
 
 
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
 
     Map(int id, String name)
     {

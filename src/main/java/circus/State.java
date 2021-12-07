@@ -2,8 +2,6 @@ package circus;
 
 import circus.actions.*;
 
-import java.awt.*;
-
 public enum State {
 
 
@@ -17,23 +15,16 @@ public enum State {
     MAIN_LOBBY_INVITE_PLAYERS(new ActionInvitePlayers()),
     WAITING_FOR_GAME(new ActionWaitingForGame());
 
-    private Action action;
-    private Mouse mouse;
+    private final Action action;
 
-    State(Action action) {
+    State(Action action)
+    {
         this.action = action;
-
-        try {
-            this.mouse = new Mouse();
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
     }
 
-    public void goNextState() throws InterruptedException {
+    public void goNextState() throws InterruptedException
+    {
         this.action.execute();
         Thread.sleep(50);
     }
-
-    public Mouse getMouse () { return this.mouse; }
 }

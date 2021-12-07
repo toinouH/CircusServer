@@ -15,14 +15,16 @@ public class MatchServer implements Runnable {
     private ServerSocket listener;
 
     private ArrayList<ClientHandler> connectedClients = new ArrayList<>();
-    private ExecutorService clientPool = Executors.newFixedThreadPool(16);
-    private StateHandler stateHandler;
+    private final ExecutorService clientPool = Executors.newFixedThreadPool(16);
+    private final StateHandler stateHandler;
 
-    public MatchServer(StateHandler stateHandler) {
+    public MatchServer(StateHandler stateHandler)
+    {
         this.stateHandler = stateHandler;
     }
 
-    public StateHandler getStateHandler() {
+    public StateHandler getStateHandler()
+    {
         return this.stateHandler;
     }
 

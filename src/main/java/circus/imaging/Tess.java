@@ -18,6 +18,7 @@ public class Tess
         // There's potential that this value is not optimal for all situations.
         // So far, it's proved to be a non-issue, though.
         this.tesseract.setTessVariable("user_defined_dpi", "70");
+        this.tesseract.setTessVariable("psm", "8");
     }
 
     public String readBufferedImage(BufferedImage input) throws TesseractException {
