@@ -62,12 +62,10 @@ public class Imaging
         // medianBlur greatly increases Tesseract's output accuracy
         Imgproc.medianBlur(flippedBuffer, flippedBuffer, 3);
         // Flip the resized Mat back to a BufferedImage and return it to the caller
-//        ImageIO.write(capture, "jpeg", new File("nice.jpeg"));
         return Mat2BufferedImage(flippedBuffer);
     }
 
     public BufferedImage captureMenuPlayButton() throws AWTException, IOException {
-//        System.out.println("Capturing play button");
         return imageScreen(this.MENU_PLAY_BUTTON);
     }
 
@@ -76,7 +74,6 @@ public class Imaging
     }
 
     public BufferedImage captureFilterGamesButton() throws AWTException, IOException {
-//        System.out.println("Capturing filter button");
         return imageScreen(this.FILTER_GAMES_BUTTON);
     }
 

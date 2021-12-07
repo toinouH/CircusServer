@@ -18,6 +18,7 @@ public class Tess
         // There's potential that this value is not optimal for all situations.
         // So far, it's proved to be a non-issue, though.
         this.tesseract.setTessVariable("user_defined_dpi", "70");
+        // Setting Tesseract to treat each ocr pass as single-word, improves accuracy heaps in our case.
         this.tesseract.setTessVariable("psm", "8");
     }
 

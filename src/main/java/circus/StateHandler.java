@@ -71,8 +71,6 @@ public class StateHandler implements Runnable {
                     .toLowerCase()
                     .contains("start"))
             {
-                System.out.println("Current state is in-lobby.");
-                System.out.println(hasMovedBot);
 
                 if (!this.hasMovedBot && this.currentMatchId != 0)
                 {
@@ -82,7 +80,7 @@ public class StateHandler implements Runnable {
 
                 if (!this.hasSetPreset && this.currentMatchId != 0) {
                     this.hasSetPreset = true;
-//                    return State.MAIN_LOBBY_MENU_SET_PRESET;
+                    return State.MAIN_LOBBY_MENU_SET_PRESET;
                 }
 
                 if (!this.hasChangedMap && this.currentMatchId != 0) {
