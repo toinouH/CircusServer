@@ -12,8 +12,8 @@ import net.sourceforge.tess4j.TesseractException;
 import java.awt.*;
 import java.io.IOException;
 
-public class StateHandler implements Runnable {
-
+public class StateHandler implements Runnable
+{
     private final Api api = new Api();
     private final Tess tess = new Tess();
     private final Imaging imaging = new Imaging();
@@ -29,6 +29,7 @@ public class StateHandler implements Runnable {
         if (this.currentMatchId == 0)
         {
             this.match = api.getMatch(matchId);
+            System.out.println(this.match.getMap());
             this.currentMatchId = matchId;
         }
         else
@@ -78,17 +79,20 @@ public class StateHandler implements Runnable {
                     return State.MAIN_LOBBY_MENU_MOVE_SPEC;
                 }
 
-                if (!this.hasSetPreset && this.currentMatchId != 0) {
+                if (!this.hasSetPreset && this.currentMatchId != 0)
+                {
                     this.hasSetPreset = true;
                     return State.MAIN_LOBBY_MENU_SET_PRESET;
                 }
 
-                if (!this.hasChangedMap && this.currentMatchId != 0) {
+                if (!this.hasChangedMap && this.currentMatchId != 0)
+                {
                     this.hasChangedMap = true;
                     return State.MAIN_LOBBY_MENU_SET_MAP;
                 }
 
-                if (!this.hasInvitedPlayers && this.currentMatchId != 0) {
+                if (!this.hasInvitedPlayers && this.currentMatchId != 0)
+                {
                     this.hasInvitedPlayers = true;
                     return State.MAIN_LOBBY_INVITE_PLAYERS;
                 }
@@ -109,7 +113,8 @@ public class StateHandler implements Runnable {
     public void run()
     {
         // I don't like this and will change how this is handled. It's messy but I'm tired.
-        while (true)
+        // noinspection InfiniteLoopStatement
+        for ( ;; )
         {
             try
             {

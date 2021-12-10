@@ -34,7 +34,8 @@ public class MatchServer implements Runnable {
         try
         {
             listener = new ServerSocket(PORT);
-            while (true) 
+            //noinspection InfiniteLoopStatement
+            for ( ;; )
             {
                 Socket client = listener.accept();
                 System.out.println("[MatchServer] New client connection instantiating...");
