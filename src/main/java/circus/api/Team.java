@@ -1,6 +1,7 @@
 package circus.api;
 
-public class Team {
+public class Team
+{
     private int id;
     private String name;
     private String icon;
@@ -9,59 +10,31 @@ public class Team {
     private String instagram;
     private String youtube;
 
-    public int getId() {
-        return id;
-    }
+    public int getId()                          { return id;                    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id)                   { this.id = id;                 }
 
-    public String getName() {
-        return name;
-    }
+    public String getName()                     { return name;                  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name)            { this.name = name;             }
 
-    public String getIcon() {
-        return icon;
-    }
+    public String getIcon()                     { return icon;                  }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
+    public void setIcon(String icon)            { this.icon = icon;             }
 
-    public String getTwitter() {
-        return twitter;
-    }
+    public String getTwitter()                  { return twitter;               }
 
-    public void setTwitter(String twitter) {
-        this.twitter = twitter;
-    }
+    public void setTwitter(String twitter)      { this.twitter = twitter;       }
 
-    public String getWebsite() {
-        return website;
-    }
+    public String getWebsite()                  { return website;               }
 
-    public void setWebsite(String website) {
-        this.website = website;
-    }
+    public void setWebsite(String website)      { this.website = website;       }
 
-    public String getInstagram() {
-        return instagram;
-    }
+    public String getInstagram()                { return instagram;             }
 
-    public void setInstagram(String instagram) {
-        this.instagram = instagram;
-    }
+    public void setInstagram(String instagram)  { this.instagram = instagram;   }
 
-    public String getYoutube() {
-        return youtube;
-    }
+    public String getYoutube()                  { return youtube;               }
 
-    public void setYoutube(String youtube) {
-        this.youtube = youtube;
-    }
+    public void setYoutube(String youtube)      { this.youtube = youtube;       }
 }

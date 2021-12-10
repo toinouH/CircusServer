@@ -44,7 +44,8 @@ public class ActionSetMap extends Action {
         this.robot.keyRelease(KeyEvent.VK_DOWN);
 
         // TODO: Abstract keyPress/keyRelease so we don't have to manually delay each press
-        for (int i = 1; i <= this.map.getId() - 1; i++) {
+        for (int i = 1; i <= this.map.getId() - 1; i++)
+        {
             this.robot.keyPress(KeyEvent.VK_DOWN);
             this.robot.keyRelease(KeyEvent.VK_DOWN);
         }

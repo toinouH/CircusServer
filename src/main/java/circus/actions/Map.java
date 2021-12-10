@@ -35,7 +35,7 @@ public enum Map {
         this.name = name;
     }
 
-    public int getId() { return this.id; }
+    public int getId()      { return this.id;   }
     public String getName() { return this.name; }
 
     public static Map valueOf(int id)

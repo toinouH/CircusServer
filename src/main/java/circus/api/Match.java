@@ -50,51 +50,29 @@ public class Match {
     public int getMap()
     {
         System.out.println("[MatchServer] Setting match.currentMap to " + this.map);
-        switch (this.map.toLowerCase())
-        {
-            case "hanamura":
-                return 1;
-            case "horizon lunar colony":
-                return 3;
-            case "anubis":
-                return 5;
-            case "volskaya":
-                return 6;
-            case "busan":
-                return 7;
-            case "ilios":
-                return 8;
-            case "lijiang":
-                return 9;
-            case "nepal":
-                return 11;
-            case "oasis":
-                return 12;
-            case "dorado":
-                return 13;
-            case "havana":
-                return 14;
-            case "junkertown":
-                return 15;
-            case "rialto":
-                return 16;
-            case "route 66":
-                return 17;
-            case "watchpoint gibraltar":
-                return 18;
-            case "blizzard world":
-                return 19;
-            case "eichenwalde":
-                return 21;
-            case "hollywood":
-                return 23;
-            case "king's row":
-                return 25;
-            case "numbani":
-                return 27;
-            default:
-                return 20;
-        }
+        return switch (this.map.toLowerCase()) {
+            case "hanamura" -> 1;
+            case "horizon lunar colony" -> 3;
+            case "anubis" -> 5;
+            case "volskaya" -> 6;
+            case "busan" -> 7;
+            case "ilios" -> 8;
+            case "lijiang" -> 9;
+            case "nepal" -> 11;
+            case "oasis" -> 12;
+            case "dorado" -> 13;
+            case "havana" -> 14;
+            case "junkertown" -> 15;
+            case "rialto" -> 16;
+            case "route 66" -> 17;
+            case "watchpoint gibraltar" -> 18;
+            case "blizzard world" -> 19;
+            case "eichenwalde" -> 21;
+            case "hollywood" -> 23;
+            case "king's row" -> 25;
+            case "numbani" -> 27;
+            default -> 20;
+        };
     }
 
     public void setMap(String map) {
