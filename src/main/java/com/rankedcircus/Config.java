@@ -35,9 +35,9 @@ public class Config
             File file = new File("circus.config");
 
             if ( file.createNewFile() )
-                System.out.println("[Config] Configuration file exists at path circus.config");
-            else
                 System.out.println("[Config] Configuration file did not exist, writing default to path circus.config");
+            else
+                System.out.println("[Config] Configuration file exists at path circus.config");
         }
         catch (Exception e)
         {

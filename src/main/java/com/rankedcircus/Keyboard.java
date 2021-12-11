@@ -9,29 +9,20 @@ public class Keyboard
 {
     private static boolean isSpecialChar(char c)
     {
-        if (Character.isUpperCase(c))
+        if ( Character.isUpperCase(c) )
             return true;
 
-        switch (c)
+        switch ( c )
         {
             case '!':
-                return true;
             case '@':
-                return true;
             case '#':
-                return true;
             case '$':
-                return true;
             case '%':
-                return true;
             case '^':
-                return true;
             case '&':
-                return true;
             case '*':
-                return true;
             case '(':
-                return true;
             case ')':
                 return true;
             default:
@@ -54,11 +45,11 @@ public class Keyboard
 
     public static void sendString(Robot robot, String intake)
     {
-        for (char c : intake.toCharArray())
+        for ( char c : intake.toCharArray() )
         {
-            if (Keyboard.isSpecialChar(c))
+            if ( Keyboard.isSpecialChar(c) )
             {
-                // This is a hack and I hate it but I hate the Java KeyEvent enum more.
+                // This is a hack, and I hate it, but I hate the Java KeyEvent enum more.
                 if (c == '#')
                     c = '3';
 
