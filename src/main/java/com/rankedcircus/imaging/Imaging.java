@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 public class Imaging
@@ -24,7 +25,7 @@ public class Imaging
     private static final Position MOVE_AND_DONE_BUTTON = new Position(1339, 323, 100, 80, 300, 150);
     private static final Position BLUE_TEAM_LOBBY_START = new Position(291, 461, 100, 80, 300, 150);
     private static final Position CIRCUS_PRESET_1 = new Position(123, 261, 250, 100, 300, 150);
-    private static final Position CHAT_SECTOR = new Position(45, 750, 440, 230, 600, 300);
+    private static final Position CHAT_SECTOR = new Position(40, 960, 440, 35, 600, 60);
 
     private static Mat BufferedImage2Mat(BufferedImage image) throws IOException
     {
@@ -63,7 +64,7 @@ public class Imaging
         // medianBlur greatly increases Tesseract's output accuracy
         Imgproc.medianBlur(flippedBuffer, flippedBuffer, 3);
         // Flip the resized Mat back to a BufferedImage and return it to the caller
-        // ImageIO.write(capture, "jpeg", new File("output_debug.jpeg"));
+        ImageIO.write(capture, "jpeg", new File("output_debug.jpeg"));
         return Mat2BufferedImage(flippedBuffer);
     }
 
@@ -95,7 +96,14 @@ public class Imaging
         return imageScreen(CIRCUS_PRESET_1);
     }
 
-    public static BufferedImage captureChatSector() throws AWTException, IOException  {
-        return imageScreen(CHAT_SECTOR);
+    // TODO: Think about whether or not I want to throw exceptions on the function or include try/catch.
+    public static BufferedImage captureChatSector()
+    {
+        try {
+            return imageScreen(CHAT_SECTOR);
+        } catch (AWTException |  IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

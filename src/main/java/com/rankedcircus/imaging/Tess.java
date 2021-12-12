@@ -5,24 +5,46 @@ import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import java.awt.image.BufferedImage;
 
+// Singleton
 public class Tess
 {
-    private final Tesseract tesseract = new Tesseract();
-    // This is entirely system dependant. This is Tesseract's default installation path on Windows x64
-    // TODO: Add configuration file to intake user's Tesseract path.
-    private static final String TESS_DATA = Config.getConfig().read("circus.tesseract_path");
+    private static Tess tess;
+    private static final Tesseract tesseract;
 
-    public Tess()
+    static
     {
-        this.tesseract.setDatapath(TESS_DATA);
-        // There's potential that this value is not optimal for all situations.
-        // So far, it's proved to be a non-issue, though.
-        this.tesseract.setTessVariable("user_defined_dpi", "70");
-        // Setting Tesseract to treat each ocr pass as single-word, improves accuracy heaps in our case.
-        this.tesseract.setTessVariable("psm", "8");
+        tess = new Tess();
+        tesseract = new Tesseract();
+        tesseract.setDatapath(Config.getConfig().read("circus.tesseract_path"));
+        tesseract.setTessVariable("user_defined_dpi", "70");
+        tesseract.setTessVariable("user_defined_dpi", "70");
     }
 
-    public String readBufferedImage(BufferedImage input) throws TesseractException {
-        return tesseract.doOCR(input);
+    public static Tess getInstance()
+    {
+        return tess;
+    }
+
+    public void setTesseractVar(String key, String value)
+    {
+        tesseract.setTessVariable(key, value);
+    }
+
+    public String readSingleLine(BufferedImage input)
+    {
+        Tess.getInstance().setTesseractVar("psm", "3");
+        String ret = this.readBufferedImage(input);
+        Tess.getInstance().setTesseractVar("psm", "8");
+        return ret;
+    }
+
+    public String readBufferedImage(BufferedImage input)
+    {
+        try {
+            return tesseract.doOCR(input);
+        } catch (TesseractException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.rankedcircus;
 
-import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
 import static java.awt.event.KeyEvent.getExtendedKeyCodeForChar;
@@ -31,7 +30,7 @@ public class Keyboard
         }
     }
 
-    private static void sendKey(char key)
+    public static void sendKey(char key)
     {
         SRobot.getRobot().keyPress(getExtendedKeyCodeForChar(key));
         SRobot.getRobot().keyRelease(getExtendedKeyCodeForChar(key));
