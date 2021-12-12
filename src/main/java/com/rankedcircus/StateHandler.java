@@ -16,7 +16,6 @@ public class StateHandler implements Runnable
 {
     private final Api api = new Api();
     private final Tess tess = new Tess();
-    private final Imaging imaging = new Imaging();
     private Match match = new Match();
     private boolean hasMovedBot = false;
     private boolean hasSetPreset = false;
@@ -47,20 +46,18 @@ public class StateHandler implements Runnable
         {
             // This is a bit silly and I need to change how it's handled or train a better Tesseract model.
             // Tesseract is struggling to recognize "PLAY", Blizzard changed the lighting of menu maps apparently.
-            String ocrPlay = tess.readBufferedImage(imaging.captureMenuPlayButton()).toLowerCase();
+            String ocrPlay = tess.readBufferedImage(Imaging.captureMenuPlayButton()).toLowerCase();
             if (ocrPlay.contains("play") || ocrPlay.contains("plhy"))
-            {
                 return State.MAIN_MENU;
-            }
-            if (tess.readBufferedImage(imaging.captureFindGroupButton())
+
+            if (tess.readBufferedImage(Imaging.captureFindGroupButton())
                     .toLowerCase()
                     .contains("group"))
             {
-
                 return State.PLAY_MENU;
             }
 
-            if (tess.readBufferedImage(imaging.captureFilterGamesButton())
+            if (tess.readBufferedImage(Imaging.captureFilterGamesButton())
                     .toLowerCase()
                     .contains("filter"))
             {
@@ -68,7 +65,7 @@ public class StateHandler implements Runnable
                 return State.GAME_BROWSER_MENU;
             }
 
-            if (tess.readBufferedImage(imaging.captureLobbyStartButton())
+            if (tess.readBufferedImage(Imaging.captureLobbyStartButton())
                     .toLowerCase()
                     .contains("start"))
             {
@@ -102,7 +99,8 @@ public class StateHandler implements Runnable
 
                 return State.WAITING_FOR_GAME;
             }
-        } catch (IOException | TesseractException | AWTException e)
+        }
+        catch (IOException | TesseractException | AWTException e)
         {
             e.printStackTrace();
         }
@@ -116,6 +114,9 @@ public class StateHandler implements Runnable
         // noinspection InfiniteLoopStatement
         for ( ;; )
         {
+
+            //--------------------------------------------------
+            // State-specific logic.
             try
             {
                 State currentState = this.getCurrentState();
@@ -128,12 +129,14 @@ public class StateHandler implements Runnable
                                 .inviteTeam(match.getBlueTeam(), 1)
                                 .inviteTeam(match.getRedTeam(), 2);
                     }
-                    if (currentState == State.MAIN_LOBBY_MENU_SET_MAP && hasInvitedPlayers)
+
+                    if (currentState == State.MAIN_LOBBY_MENU_SET_MAP)
                     {
                         new ActionSetMap()
                                 .setMap(Map.valueOf(match.getMap()))
                                 .changeMap();
                     }
+
                     currentState.goNextState();
                 }
             }

@@ -17,13 +17,14 @@ public class Imaging
 {
     // Hard coded positions for 1920x1080.
     // TODO: Provide config file support for smaller resolutions.
-    private final Position MENU_PLAY_BUTTON = new Position(40, 210, 130, 75, 600, 300);
-    private final Position FIND_GROUP_BUTTON = new Position(885, 920, 145, 40, 600, 200);
-    private final Position FILTER_GAMES_BUTTON = new Position(1108, 224, 92, 60, 600, 200);
-    private final Position START_MATCH_BUTTON = new Position(872, 883, 100, 60, 600, 200);
-    private final Position MOVE_AND_DONE_BUTTON = new Position(1339, 323, 100, 80, 300, 150);
-    private final Position BLUE_TEAM_LOBBY_START = new Position(291, 461, 100, 80, 300, 150);
-    private final Position CIRCUS_PRESET_1 = new Position(123, 261, 250, 100, 300, 150);
+    private static final Position MENU_PLAY_BUTTON = new Position(40, 210, 130, 75, 600, 300);
+    private static final Position FIND_GROUP_BUTTON = new Position(875, 910, 155, 70, 600, 200);
+    private static final Position FILTER_GAMES_BUTTON = new Position(1108, 224, 92, 60, 600, 200);
+    private static final Position START_MATCH_BUTTON = new Position(872, 883, 100, 60, 600, 200);
+    private static final Position MOVE_AND_DONE_BUTTON = new Position(1339, 323, 100, 80, 300, 150);
+    private static final Position BLUE_TEAM_LOBBY_START = new Position(291, 461, 100, 80, 300, 150);
+    private static final Position CIRCUS_PRESET_1 = new Position(123, 261, 250, 100, 300, 150);
+    private static final Position CHAT_SECTOR = new Position(45, 750, 440, 230, 600, 300);
 
     private static Mat BufferedImage2Mat(BufferedImage image) throws IOException
     {
@@ -62,34 +63,39 @@ public class Imaging
         // medianBlur greatly increases Tesseract's output accuracy
         Imgproc.medianBlur(flippedBuffer, flippedBuffer, 3);
         // Flip the resized Mat back to a BufferedImage and return it to the caller
+        // ImageIO.write(capture, "jpeg", new File("output_debug.jpeg"));
         return Mat2BufferedImage(flippedBuffer);
     }
 
-    public BufferedImage captureMenuPlayButton() throws AWTException, IOException {
-        return imageScreen(this.MENU_PLAY_BUTTON);
+    public static BufferedImage captureMenuPlayButton() throws AWTException, IOException {
+        return imageScreen(MENU_PLAY_BUTTON);
     }
 
-    public BufferedImage captureFindGroupButton() throws AWTException, IOException {
-        return imageScreen(this.FIND_GROUP_BUTTON);
+    public static BufferedImage captureFindGroupButton() throws AWTException, IOException {
+        return imageScreen(FIND_GROUP_BUTTON);
     }
 
-    public BufferedImage captureFilterGamesButton() throws AWTException, IOException {
-        return imageScreen(this.FILTER_GAMES_BUTTON);
+    public static BufferedImage captureFilterGamesButton() throws AWTException, IOException {
+        return imageScreen(FILTER_GAMES_BUTTON);
     }
 
-    public BufferedImage captureLobbyStartButton() throws AWTException, IOException {
-        return imageScreen(this.START_MATCH_BUTTON);
+    public static BufferedImage captureLobbyStartButton() throws AWTException, IOException {
+        return imageScreen(START_MATCH_BUTTON);
     }
 
-    public BufferedImage captureDoneAndMoveButton() throws AWTException, IOException {
-        return imageScreen(this.MOVE_AND_DONE_BUTTON);
+    public static BufferedImage captureDoneAndMoveButton() throws AWTException, IOException {
+        return imageScreen(MOVE_AND_DONE_BUTTON);
     }
 
-    public BufferedImage captureBlueTeamSlot() throws AWTException, IOException {
-        return imageScreen(this.BLUE_TEAM_LOBBY_START);
+    public static BufferedImage captureBlueTeamSlot() throws AWTException, IOException {
+        return imageScreen(BLUE_TEAM_LOBBY_START);
     }
 
-    public BufferedImage captureCircusPreset() throws AWTException, IOException {
-        return imageScreen(this.CIRCUS_PRESET_1);
+    public static BufferedImage captureCircusPreset() throws AWTException, IOException {
+        return imageScreen(CIRCUS_PRESET_1);
+    }
+
+    public static BufferedImage captureChatSector() throws AWTException, IOException  {
+        return imageScreen(CHAT_SECTOR);
     }
 }

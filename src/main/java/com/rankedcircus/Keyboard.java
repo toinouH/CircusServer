@@ -12,6 +12,7 @@ public class Keyboard
         if ( Character.isUpperCase(c) )
             return true;
 
+        // TODO: Not this, I think..?
         switch ( c )
         {
             case '!':
@@ -30,21 +31,24 @@ public class Keyboard
         }
     }
 
-    private static void sendKey(Robot robot, char key)
+    private static void sendKey(char key)
     {
-        robot.keyPress(getExtendedKeyCodeForChar(key));
-        robot.keyRelease(getExtendedKeyCodeForChar(key));
+        SRobot.getRobot().keyPress(getExtendedKeyCodeForChar(key));
+        SRobot.getRobot().keyRelease(getExtendedKeyCodeForChar(key));
     }
 
-    private static void sendModifiedKey(Robot robot, char key)
+    private static void sendModifiedKey(char key)
     {
-        robot.keyPress(KeyEvent.VK_SHIFT);
-        Keyboard.sendKey(robot, key);
-        robot.keyRelease(KeyEvent.VK_SHIFT);
+        SRobot.getRobot().keyPress(KeyEvent.VK_SHIFT);
+        Keyboard.sendKey(key);
+        SRobot.getRobot().keyRelease(KeyEvent.VK_SHIFT);
     }
 
-    public static void sendString(Robot robot, String intake)
+    public static void sendString(String intake)
     {
+        // Robot type go fast like speedracer~!!!!
+        SRobot.getRobot().setAutoDelay( 5 );
+
         for ( char c : intake.toCharArray() )
         {
             if ( Keyboard.isSpecialChar(c) )
@@ -53,10 +57,12 @@ public class Keyboard
                 if (c == '#')
                     c = '3';
 
-                Keyboard.sendModifiedKey(robot, c);
+                Keyboard.sendModifiedKey(c);
                 continue;
             }
-            Keyboard.sendKey(robot, c);
+            Keyboard.sendKey(c);
         }
+
+        SRobot.getRobot().setAutoDelay( 50 );
     }
 }

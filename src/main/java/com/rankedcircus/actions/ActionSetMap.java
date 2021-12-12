@@ -6,7 +6,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class ActionSetMap extends Action {
+public class ActionSetMap extends Action
+{
     private Map map;
     private Robot robot;
 
@@ -25,7 +26,8 @@ public class ActionSetMap extends Action {
         }
     }
 
-    public ActionSetMap setMap(Map map) {
+    public ActionSetMap setMap(Map map)
+    {
         this.map = map;
         return this;
     }

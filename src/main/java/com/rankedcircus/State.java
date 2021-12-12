@@ -2,9 +2,8 @@ package com.rankedcircus;
 
 import com.rankedcircus.actions.*;
 
-public enum State {
-
-
+public enum State
+{
     MAIN_MENU(new ActionPlay()),
     PLAY_MENU(new ActionGameBrowser()),
     GAME_BROWSER_MENU(new ActionCreateLobby()),
