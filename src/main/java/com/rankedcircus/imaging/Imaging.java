@@ -1,5 +1,6 @@
 package com.rankedcircus.imaging;
 
+import com.rankedcircus.CApplication;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.core.Size;
@@ -25,7 +26,7 @@ public class Imaging
     private static final Position MOVE_AND_DONE_BUTTON = new Position(1339, 323, 100, 80, 300, 150);
     private static final Position BLUE_TEAM_LOBBY_START = new Position(291, 461, 100, 80, 300, 150);
     private static final Position CIRCUS_PRESET_1 = new Position(123, 261, 250, 100, 300, 150);
-    private static final Position CHAT_SECTOR = new Position(40, 960, 440, 35, 600, 60);
+    private static final Position CHAT_SECTOR = new Position(35, 658, 440, 35, 900, 60);
 
     private static Mat BufferedImage2Mat(BufferedImage image) throws IOException
     {
@@ -42,7 +43,7 @@ public class Imaging
         return ImageIO.read(new ByteArrayInputStream(mob.toArray()));
     }
 
-    private static BufferedImage imageScreen(Position position) throws AWTException, IOException
+    private static BufferedImage imageScreen(Position position, boolean useGray ) throws AWTException, IOException
     {
         // Construct rectangle of dimensions using position param
         Rectangle screenRect = new Rectangle(
@@ -60,48 +61,61 @@ public class Imaging
         // This isn't common in Java, but OpenCV was written in C. "resize" sets "pre" to the output of "resize"
         Imgproc.resize(flippedBuffer, flippedBuffer, size, 2, 2, Imgproc.INTER_AREA);
         // cvtColor tends to help Tesseract output proper readings
-        Imgproc.cvtColor(flippedBuffer, flippedBuffer, Imgproc.COLOR_BGR2RGB);
+        if ( useGray )
+            Imgproc.cvtColor(flippedBuffer, flippedBuffer, Imgproc.COLOR_BGR2GRAY);
+        else
+            Imgproc.cvtColor(flippedBuffer, flippedBuffer, Imgproc.COLOR_BGR2RGB);
         // medianBlur greatly increases Tesseract's output accuracy
         Imgproc.medianBlur(flippedBuffer, flippedBuffer, 3);
         // Flip the resized Mat back to a BufferedImage and return it to the caller
-        ImageIO.write(capture, "jpeg", new File("output_debug.jpeg"));
+        ImageIO.write(Mat2BufferedImage(flippedBuffer), "jpeg", new File("output_debug.jpeg"));
         return Mat2BufferedImage(flippedBuffer);
     }
 
     public static BufferedImage captureMenuPlayButton() throws AWTException, IOException {
-        return imageScreen(MENU_PLAY_BUTTON);
+        return imageScreen(MENU_PLAY_BUTTON, false);
     }
 
     public static BufferedImage captureFindGroupButton() throws AWTException, IOException {
-        return imageScreen(FIND_GROUP_BUTTON);
+        return imageScreen(FIND_GROUP_BUTTON, false);
     }
 
     public static BufferedImage captureFilterGamesButton() throws AWTException, IOException {
-        return imageScreen(FILTER_GAMES_BUTTON);
+        return imageScreen(FILTER_GAMES_BUTTON, false);
     }
 
     public static BufferedImage captureLobbyStartButton() throws AWTException, IOException {
-        return imageScreen(START_MATCH_BUTTON);
+        return imageScreen(START_MATCH_BUTTON, false);
     }
 
     public static BufferedImage captureDoneAndMoveButton() throws AWTException, IOException {
-        return imageScreen(MOVE_AND_DONE_BUTTON);
+        return imageScreen(MOVE_AND_DONE_BUTTON, false);
     }
 
     public static BufferedImage captureBlueTeamSlot() throws AWTException, IOException {
-        return imageScreen(BLUE_TEAM_LOBBY_START);
+        return imageScreen(BLUE_TEAM_LOBBY_START, false);
     }
 
     public static BufferedImage captureCircusPreset() throws AWTException, IOException {
-        return imageScreen(CIRCUS_PRESET_1);
+        return imageScreen(CIRCUS_PRESET_1, false);
     }
 
     // TODO: Think about whether or not I want to throw exceptions on the function or include try/catch.
     public static BufferedImage captureChatSector()
     {
-        try {
-            return imageScreen(CHAT_SECTOR);
-        } catch (AWTException |  IOException e) {
+        try
+        {
+            BufferedImage ret;
+
+            CApplication.getInstance().openChatIfClosed();
+            ret = imageScreen( CHAT_SECTOR, true );
+            Thread.sleep(200);
+            CApplication.getInstance().closeChatIfOpen();
+
+            return ret;
+        }
+        catch (AWTException | IOException | InterruptedException e)
+        {
             e.printStackTrace();
             return null;
         }

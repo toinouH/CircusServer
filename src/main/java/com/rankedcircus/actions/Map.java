@@ -1,7 +1,8 @@
 package com.rankedcircus.actions;
 
 
-public enum Map {
+public enum Map
+{
     // This is also really stupid. If you actually end up using this let me know and I'll make it not stupid.
     // That being said just use the D port of this project as it'll be updated frequently.
     HANAMURA(    1,     "Hanamura"),

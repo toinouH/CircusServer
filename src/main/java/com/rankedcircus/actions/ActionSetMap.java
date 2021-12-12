@@ -1,6 +1,7 @@
 package com.rankedcircus.actions;
 
 import com.rankedcircus.Mouse;
+import com.rankedcircus.SRobot;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,7 @@ public class ActionSetMap extends Action
     {
         this.name = "SetMap";
         this.queue = new ArrayList<ActionPoint>() {{
+
             new ActionPoint(1338, 207);
         }};
 
@@ -34,6 +36,9 @@ public class ActionSetMap extends Action
 
     public ActionSetMap changeMap()
     {
+        System.out.println("changeMap called.");
+        SRobot.getRobot().setAutoDelay(75);
+
         // Lobby settings
         Mouse.getInstance().moveThenClick(1533, 313);
         // Maps menu

@@ -17,7 +17,6 @@ public class Tess
         tesseract = new Tesseract();
         tesseract.setDatapath(Config.getConfig().read("circus.tesseract_path"));
         tesseract.setTessVariable("user_defined_dpi", "70");
-        tesseract.setTessVariable("user_defined_dpi", "70");
     }
 
     public static Tess getInstance()

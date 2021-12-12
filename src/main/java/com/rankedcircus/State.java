@@ -12,7 +12,9 @@ public enum State
     MAIN_LOBBY_MENU_SET_MAP(new ActionSetMap()),
     MAIN_LOBBY_WAITING_FOR_PLAYERS(new ActionWaitingForPlayers()),
     MAIN_LOBBY_INVITE_PLAYERS(new ActionInvitePlayers()),
-    WAITING_FOR_GAME(new ActionWaitingForGame());
+    MAIN_LOBBY_START_GAME(new ActionStartGame()),
+    WAITING_FOR_GAME(new ActionWaitingForGame()),
+    IN_GAME(new ActionInGame());
 
     private final Action action;
 
@@ -20,6 +22,7 @@ public enum State
     {
         this.action = action;
     }
+
 
     public void goNextState() throws InterruptedException
     {

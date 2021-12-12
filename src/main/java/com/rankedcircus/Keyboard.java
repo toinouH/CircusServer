@@ -43,18 +43,31 @@ public class Keyboard
         SRobot.getRobot().keyRelease(KeyEvent.VK_SHIFT);
     }
 
+    public static void sendPause()
+    {
+    }
+
     public static void sendString(String intake)
     {
         // Robot type go fast like speedracer~!!!!
-        SRobot.getRobot().setAutoDelay( 5 );
+        SRobot.getRobot().setAutoDelay( 15 );
 
         for ( char c : intake.toCharArray() )
         {
-            if ( Keyboard.isSpecialChar(c) )
+            if ( Keyboard.isSpecialChar(c) || c == ':' )
             {
                 // This is a hack, and I hate it, but I hate the Java KeyEvent enum more.
-                if (c == '#')
-                    c = '3';
+                switch ( c )
+                {
+                    case '#': {
+                        c = '3';
+                        break;
+                    }
+                    case ':': {
+                        c = ';';
+                        break;
+                    }
+                }
 
                 Keyboard.sendModifiedKey(c);
                 continue;

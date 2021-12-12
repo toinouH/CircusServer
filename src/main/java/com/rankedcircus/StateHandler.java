@@ -2,33 +2,33 @@ package com.rankedcircus;
 
 import com.rankedcircus.actions.ActionInvitePlayers;
 import com.rankedcircus.actions.ActionSetMap;
+import com.rankedcircus.actions.ActionStartGame;
 import com.rankedcircus.actions.Map;
 import com.rankedcircus.api.Api;
 import com.rankedcircus.api.Match;
 import com.rankedcircus.imaging.Imaging;
 import com.rankedcircus.imaging.Tess;
-import net.sourceforge.tess4j.TesseractException;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 public class StateHandler implements Runnable
 {
-    private final Api api = new Api();
+    private CommandHandler commandHandler = new CommandHandler();
     private Match match = new Match();
     private boolean hasMovedBot = false;
     private boolean hasSetPreset = false;
     private boolean hasInvitedPlayers = false;
     private boolean hasChangedMap = false;
     private int currentMatchId = 0;
+    private boolean hasGameStarted = false;
 
     public void setCurrentMatchId(int matchId)
     {
         if (this.currentMatchId == 0)
         {
-            this.match = api.getMatch(matchId);
-            System.out.println(this.match.getMap());
+            this.match = Api.getInstance().getMatch(matchId);
+            System.out.println(this.match.getMapId());
             this.currentMatchId = matchId;
         }
         else
@@ -94,10 +94,21 @@ public class StateHandler implements Runnable
                     return State.MAIN_LOBBY_INVITE_PLAYERS;
                 }
 
+                if (this.hasInvitedPlayers && this.hasChangedMap && !this.hasGameStarted)
+                {
+                    this.hasGameStarted = true;
+                    return State.MAIN_LOBBY_START_GAME;
+                }
+
                 if (this.currentMatchId != 0)
                     return State.MAIN_LOBBY_WAITING_FOR_PLAYERS;
 
                 return State.WAITING_FOR_GAME;
+            }
+            else
+            {
+                if (this.hasInvitedPlayers && this.hasChangedMap && this.hasGameStarted)
+                    return State.IN_GAME;
             }
         }
         catch (IOException | AWTException e)
@@ -114,50 +125,48 @@ public class StateHandler implements Runnable
         // noinspection InfiniteLoopStatement
         for ( ;; )
         {
-//
-//            //--------------------------------------------------
-//            // State-specific logic.
-//            try
-//            {
-//                State currentState = this.getCurrentState();
-//                if (currentState != null)
-//                {
-//                    if (currentState == State.MAIN_LOBBY_INVITE_PLAYERS && hasMovedBot)
-//                    {
-//                        match = api.getMatch(this.currentMatchId);
-//                        new ActionInvitePlayers()
-//                                .inviteTeam(match.getBlueTeam(), 1)
-//                                .inviteTeam(match.getRedTeam(), 2);
-//                    }
-//
-//                    if (currentState == State.MAIN_LOBBY_MENU_SET_MAP)
-//                    {
-//                        new ActionSetMap()
-//                                .setMap(Map.valueOf(match.getMap()))
-//                                .changeMap();
-//                    }
-//
-//                    currentState.goNextState();
-//                }
-//            }
-//            catch (InterruptedException e)
-//            {
-//                e.printStackTrace();
-//            }
-
             //--------------------------------------------------
-            // Perform imaging/read of chat sector.
-            Keyboard.sendKey((char) KeyEvent.VK_ENTER);
-            String ocrChatSector = Tess.getInstance().readSingleLine(Imaging.captureChatSector());
-            System.out.println(ocrChatSector);
-            Keyboard.sendKey((char) KeyEvent.VK_ENTER);
+            // State-specific logic.
+            State currentState = this.getCurrentState();
 
-            if (ocrChatSector.toLowerCase().contains("pause"))
-                System.out.println("user requested pause.");
+            try
+            {
+                if (currentState == null)
+                    continue;
+
+                if (currentState == State.MAIN_LOBBY_INVITE_PLAYERS && hasMovedBot)
+                {
+                    hasInvitedPlayers = true;
+                    match = Api.getInstance().getMatch(this.currentMatchId);
+                    new ActionInvitePlayers()
+                            .inviteTeam(match.getBlueTeam(), 1)
+                            .inviteTeam(match.getRedTeam(), 2);
+                }
+
+                if (currentState == State.MAIN_LOBBY_MENU_SET_MAP && !hasInvitedPlayers)
+                {
+                    new ActionSetMap()
+                            .setMap(Map.valueOf(match.getMapId()))
+                            .changeMap();
+                }
+
+                if (currentState == State.MAIN_LOBBY_START_GAME)
+                    Thread.sleep(7500);
+
+                currentState.goNextState();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+
+            // Perform imaging/read of chat sector.
+            if ( currentState == State.IN_GAME )
+                commandHandler.intake(Tess.getInstance().readSingleLine(Imaging.captureChatSector()));
 
             // Genuinely fuck Java.
             try {
-                Thread.sleep(50);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

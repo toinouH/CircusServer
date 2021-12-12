@@ -8,19 +8,36 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
+// Singleton
 public class Api
 {
+    private static Api api;
+
+    static
+    {
+        api = new Api();
+        if ( Config.getConfig().read("circus.dev_mode").equalsIgnoreCase("true") )
+        {
+            api.setApiurl(Config.getConfig().read("circus.api_dev"));
+            System.out.println("[API] Launched in development mode, swapped apiUrl to " + api.getApiUrl());
+        }
+    }
+
+    public static Api getInstance()
+    {
+        return api;
+    }
+
     private final OkHttpClient httpClient = new OkHttpClient();
     private String apiUrl = Config.getConfig().read("circus.api_prod");
 
     public Api()
     {
-        if ( Config.getConfig().read("circus.dev_mode").equalsIgnoreCase("true") )
-        {
-            this.apiUrl = Config.getConfig().read("circus.api_dev");
-            System.out.println("[API] Launched in development mode, swapped apiUrl to " + this.apiUrl);
-        }
+        System.out.println("Api constructor called.");
     }
+
+    public void setApiurl(String newUrl)    {   this.apiUrl = newUrl;   }
+    public String getApiUrl()               {   return this.apiUrl;     }
 
     public Player getPlayer( int id ) throws IOException
     {

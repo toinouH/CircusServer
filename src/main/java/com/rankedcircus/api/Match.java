@@ -2,9 +2,10 @@ package com.rankedcircus.api;
 
 import java.util.ArrayList;
 
-public class Match {
+public class Match
+{
     private int id;
-    private String timestamp;
+    private String time_stamp;
     private ArrayList<String> blue_team;
     private ArrayList<String> red_team;
     private String map;
@@ -13,9 +14,9 @@ public class Match {
     private int blue_captain;
     private int red_captain;
 
-    public String getTimestamp()                            { return timestamp;             }
+    public String getTimestamp()                            { return time_stamp;            }
 
-    public void setTimestamp(String timestamp)              { this.timestamp = timestamp;   }
+    public void setTimestamp(String timestamp)              { this.time_stamp = timestamp;  }
 
     public ArrayList<String> getBlueTeam()                  { return blue_team;             }
 
@@ -29,10 +30,12 @@ public class Match {
 
     public void setId(int id)                               { this.id = id;                 }
 
-    // This is ass this is not going live this is going to be nuked just needed to check concept
-    public int getMap()
+    public String getMap()                                  { return this.map;              }
+
+    // This is ass this is not going live this is going to be nuked just needed to check concept. Edit: jaja
+    public int getMapId()
     {
-        System.out.println("[MatchServer] Setting match.currentMap to " + this.map);
+        System.out.println("[MatchServer] getMapId() returned map id of map " + this.map);
         return switch (this.map.toLowerCase()) {
             case "hanamura" -> 1;
             case "horizon lunar colony" -> 3;
