@@ -11,14 +11,14 @@ import com.rankedcircus.imaging.Tess;
 
 public class StateHandler implements Runnable
 {
-    private CommandHandler commandHandler   = new CommandHandler();
-    private Match match                     = new Match();
-    private int currentMatchId              = 0;
-    private boolean hasMovedBot             = false;
-    private boolean hasSetPreset            = false;
-    private boolean hasInvitedPlayers       = false;
-    private boolean hasChangedMap           = false;
-    private boolean hasGameStarted          = false;
+    private CommandHandler commandHandler          = new CommandHandler();
+    private Match          match                   = new Match();
+    private int            currentMatchId          = 0;
+    private boolean        hasMovedBot             = false;
+    private boolean        hasSetPreset            = false;
+    private boolean        hasInvitedPlayers       = false;
+    private boolean        hasChangedMap           = false;
+    private boolean        hasGameStarted          = false;
 
     public void setCurrentMatchId(int matchId)
     {
@@ -142,7 +142,7 @@ public class StateHandler implements Runnable
 
             // Perform imaging/read of chat sector.
             if (currentState == State.IN_GAME)
-                    commandHandler.intake(Tess.getInstance().readSingleLine(Imaging.captureChatSector()));
+                commandHandler.intake(Tess.getInstance().readSingleLine(Imaging.captureChatSector()));
 
             CApplication.getInstance().sleepFor( 100 );
         }
