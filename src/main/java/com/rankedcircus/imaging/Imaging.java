@@ -1,6 +1,7 @@
 package com.rankedcircus.imaging;
 
 import com.rankedcircus.CApplication;
+import com.rankedcircus.SRobot;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.core.Size;
@@ -54,7 +55,7 @@ public class Imaging
                 position.getHeight()
         );
         // Capture rectangle of screen using rectangle object we just constructed
-        BufferedImage capture = new Robot().createScreenCapture(screenRect);
+        BufferedImage capture = SRobot.getRobot().createScreenCapture(screenRect);
         // Declare & Define new Mat object for any preprocessing/resizing
         Mat flippedBuffer = BufferedImage2Mat(capture);
         // Instantiate Size object with defined values from whichever Position object we're working with

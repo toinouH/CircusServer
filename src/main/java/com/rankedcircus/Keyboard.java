@@ -11,29 +11,28 @@ public class Keyboard
         if ( Character.isUpperCase(c) )
             return true;
 
-        // TODO: Not this, I think..?
-        switch ( c )
-        {
-            case '!':
-            case '@':
-            case '#':
-            case '$':
-            case '%':
-            case '^':
-            case '&':
-            case '*':
-            case '(':
-            case ')':
-                return true;
-            default:
-                return false;
-        }
+        return switch (c) {
+            case '!', '@', '#', '$', '%', '^', '&', '*', '(', ')' -> true;
+            default -> false;
+        };
     }
 
     public static void sendKey(char key)
     {
         SRobot.getRobot().keyPress(getExtendedKeyCodeForChar(key));
         SRobot.getRobot().keyRelease(getExtendedKeyCodeForChar(key));
+    }
+
+    // This is a convenience function that shouldn't necessarily be needed,
+    // however, I don't think KeyEvent keycodes are 1:1 aligned with
+    // the integer value for chars, for example.
+    // Meaning that this becomes much more helpful and is justified.
+    // If they are, this isn't justifiable and should be removed.
+    // But I'm pretty sure they're not.
+    public static void sendKeyEvent(int key)
+    {
+        SRobot.getRobot().keyPress(key);
+        SRobot.getRobot().keyRelease(key);
     }
 
     private static void sendModifiedKey(char key)
@@ -43,8 +42,14 @@ public class Keyboard
         SRobot.getRobot().keyRelease(KeyEvent.VK_SHIFT);
     }
 
-    public static void sendPause()
+    public static void sendRepeatedInput(int key, int repeatCount, int msDelay)
     {
+        for (int i = 1; i <= repeatCount; i++)
+        {
+            sendKeyEvent( key );
+            if ( msDelay > 0 )
+                CApplication.getInstance().sleepFor( msDelay );
+        }
     }
 
     public static void sendString(String intake)

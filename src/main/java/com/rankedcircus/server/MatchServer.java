@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
 public class MatchServer implements Runnable {
     private static final int PORT = 6210;
     private static final String HOST = "127.0.0.1";
-    private ServerSocket listener;
 
     private ArrayList<ClientHandler> connectedClients = new ArrayList<>();
     private final ExecutorService clientPool = Executors.newFixedThreadPool(16);
@@ -33,7 +32,7 @@ public class MatchServer implements Runnable {
     {
         try
         {
-            listener = new ServerSocket(PORT);
+            ServerSocket listener = new ServerSocket(PORT);
             //noinspection InfiniteLoopStatement
             for ( ;; )
             {
