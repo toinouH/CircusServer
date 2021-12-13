@@ -42,78 +42,71 @@ public class StateHandler implements Runnable
 
     public State getCurrentState()
     {
-        try
+        // This is a bit silly and I need to change how it's handled or train a better Tesseract model.
+        // Tesseract is struggling to recognize "PLAY", Blizzard changed the lighting of menu maps apparently.
+        String ocrPlay = Tess.getInstance().readBufferedImage(Imaging.captureMenuPlayButton()).toLowerCase();
+        if (ocrPlay.contains("play") || ocrPlay.contains("plhy"))
+            return State.MAIN_MENU;
+
+        if (Tess.getInstance().readBufferedImage(Imaging.captureFindGroupButton())
+                .toLowerCase()
+                .contains("group"))
         {
-            // This is a bit silly and I need to change how it's handled or train a better Tesseract model.
-            // Tesseract is struggling to recognize "PLAY", Blizzard changed the lighting of menu maps apparently.
-            String ocrPlay = Tess.getInstance().readBufferedImage(Imaging.captureMenuPlayButton()).toLowerCase();
-            if (ocrPlay.contains("play") || ocrPlay.contains("plhy"))
-                return State.MAIN_MENU;
-
-            if (Tess.getInstance().readBufferedImage(Imaging.captureFindGroupButton())
-                    .toLowerCase()
-                    .contains("group"))
-            {
-                return State.PLAY_MENU;
-            }
-
-            if (Tess.getInstance().readBufferedImage(Imaging.captureCreateGameButton())
-                    .toLowerCase()
-                    .contains("create"))
-            {
-
-                return State.GAME_BROWSER_MENU;
-            }
-
-            if (Tess.getInstance().readBufferedImage(Imaging.captureLobbyStartButton())
-                    .toLowerCase()
-                    .contains("start"))
-            {
-
-                if (!this.hasMovedBot && this.currentMatchId != 0)
-                {
-                    this.hasMovedBot = true;
-                    return State.MAIN_LOBBY_MENU_MOVE_SPEC;
-                }
-
-                if (!this.hasSetPreset && this.currentMatchId != 0)
-                {
-                    this.hasSetPreset = true;
-                    return State.MAIN_LOBBY_MENU_SET_PRESET;
-                }
-
-                if (!this.hasChangedMap && this.currentMatchId != 0)
-                {
-                    this.hasChangedMap = true;
-                    return State.MAIN_LOBBY_MENU_SET_MAP;
-                }
-
-                if (!this.hasInvitedPlayers && this.currentMatchId != 0)
-                {
-                    this.hasInvitedPlayers = true;
-                    return State.MAIN_LOBBY_INVITE_PLAYERS;
-                }
-
-                if (this.hasInvitedPlayers && this.hasChangedMap && !this.hasGameStarted)
-                {
-                    this.hasGameStarted = true;
-                    return State.MAIN_LOBBY_START_GAME;
-                }
-
-                if (this.currentMatchId != 0)
-                    return State.MAIN_LOBBY_WAITING_FOR_PLAYERS;
-
-                return State.WAITING_FOR_GAME;
-            }
-            else
-            {
-                if (this.hasInvitedPlayers && this.hasChangedMap && this.hasGameStarted)
-                    return State.IN_GAME;
-            }
+            return State.PLAY_MENU;
         }
-        catch (IOException | AWTException e)
+
+        if (Tess.getInstance().readBufferedImage(Imaging.captureCreateGameButton())
+                .toLowerCase()
+                .contains("create"))
         {
-            e.printStackTrace();
+
+            return State.GAME_BROWSER_MENU;
+        }
+
+        if (Tess.getInstance().readBufferedImage(Imaging.captureLobbyStartButton())
+                .toLowerCase()
+                .contains("start"))
+        {
+
+            if (!this.hasMovedBot && this.currentMatchId != 0)
+            {
+                this.hasMovedBot = true;
+                return State.MAIN_LOBBY_MENU_MOVE_SPEC;
+            }
+
+            if (!this.hasSetPreset && this.currentMatchId != 0)
+            {
+                this.hasSetPreset = true;
+                return State.MAIN_LOBBY_MENU_SET_PRESET;
+            }
+
+            if (!this.hasChangedMap && this.currentMatchId != 0)
+            {
+                this.hasChangedMap = true;
+                return State.MAIN_LOBBY_MENU_SET_MAP;
+            }
+
+            if (!this.hasInvitedPlayers && this.currentMatchId != 0)
+            {
+                this.hasInvitedPlayers = true;
+                return State.MAIN_LOBBY_INVITE_PLAYERS;
+            }
+
+            if (this.hasInvitedPlayers && this.hasChangedMap && !this.hasGameStarted)
+            {
+                this.hasGameStarted = true;
+                return State.MAIN_LOBBY_START_GAME;
+            }
+
+            if (this.currentMatchId != 0)
+                return State.MAIN_LOBBY_WAITING_FOR_PLAYERS;
+
+            return State.WAITING_FOR_GAME;
+        }
+        else
+        {
+            if (this.hasInvitedPlayers && this.hasChangedMap && this.hasGameStarted)
+                return State.IN_GAME;
         }
         return null;
     }
