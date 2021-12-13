@@ -24,9 +24,9 @@ public enum State
     }
 
 
-    public void goNextState() throws InterruptedException
+    public void goNextState()
     {
         this.action.execute();
-        Thread.sleep(50);
+        CApplication.getInstance().sleepFor( 50 );
     }
 }

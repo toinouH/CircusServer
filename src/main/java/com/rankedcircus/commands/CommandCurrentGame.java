@@ -8,6 +8,12 @@ import com.rankedcircus.api.Match;
 
 public class CommandCurrentGame extends Command
 {
+    public CommandCurrentGame()
+    {
+        this.setName("CurrentGame");
+        this.setGlobalCooldown("circus.cmd.current_game.global_cooldown");
+    }
+
     @Override
     public void execute()
     {

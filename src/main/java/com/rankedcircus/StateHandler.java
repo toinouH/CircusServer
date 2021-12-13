@@ -57,9 +57,9 @@ public class StateHandler implements Runnable
                 return State.PLAY_MENU;
             }
 
-            if (Tess.getInstance().readBufferedImage(Imaging.captureFilterGamesButton())
+            if (Tess.getInstance().readBufferedImage(Imaging.captureCreateGameButton())
                     .toLowerCase()
-                    .contains("filter"))
+                    .contains("create"))
             {
 
                 return State.GAME_BROWSER_MENU;
@@ -129,47 +129,35 @@ public class StateHandler implements Runnable
             // State-specific logic.
             State currentState = this.getCurrentState();
 
-            try
+            if (currentState == null)
+                continue;
+
+            if (currentState == State.MAIN_LOBBY_INVITE_PLAYERS && hasMovedBot)
             {
-                if (currentState == null)
-                    continue;
-
-                if (currentState == State.MAIN_LOBBY_INVITE_PLAYERS && hasMovedBot)
-                {
-                    hasInvitedPlayers = true;
-                    match = Api.getInstance().getMatch(this.currentMatchId);
-                    new ActionInvitePlayers()
-                            .inviteTeam(match.getBlueTeam(), 1)
-                            .inviteTeam(match.getRedTeam(), 2);
-                }
-
-                if (currentState == State.MAIN_LOBBY_MENU_SET_MAP && !hasInvitedPlayers)
-                {
-                    new ActionSetMap()
-                            .setMap(Map.valueOf(match.getMapId()))
-                            .changeMap();
-                }
-
-                if (currentState == State.MAIN_LOBBY_START_GAME)
-                    Thread.sleep(7500);
-
-                currentState.goNextState();
+                hasInvitedPlayers = true;
+                match = Api.getInstance().getMatch(this.currentMatchId);
+                new ActionInvitePlayers()
+                        .inviteTeam(match.getBlueTeam(), 1)
+                        .inviteTeam(match.getRedTeam(), 2);
             }
-            catch (InterruptedException e)
+
+            if (currentState == State.MAIN_LOBBY_MENU_SET_MAP && !hasInvitedPlayers)
             {
-                e.printStackTrace();
+                new ActionSetMap()
+                        .setMap(Map.valueOf(match.getMapId()))
+                        .changeMap();
             }
+
+            if (currentState == State.MAIN_LOBBY_START_GAME)
+                CApplication.getInstance().sleepFor( 7500 );
+
+            currentState.goNextState();
 
             // Perform imaging/read of chat sector.
             if ( currentState == State.IN_GAME )
                 commandHandler.intake(Tess.getInstance().readSingleLine(Imaging.captureChatSector()));
 
-            // Genuinely fuck Java.
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            CApplication.getInstance().sleepFor( 100 );
         }
     }
 }

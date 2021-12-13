@@ -19,14 +19,15 @@ public class Imaging
 {
     // Hard coded positions for 1920x1080.
     // TODO: Provide config file support for smaller resolutions.
-    private static final Position MENU_PLAY_BUTTON = new Position(40, 210, 130, 75, 600, 300);
-    private static final Position FIND_GROUP_BUTTON = new Position(875, 910, 155, 70, 600, 200);
-    private static final Position FILTER_GAMES_BUTTON = new Position(1108, 224, 92, 60, 600, 200);
-    private static final Position START_MATCH_BUTTON = new Position(872, 883, 100, 60, 600, 200);
-    private static final Position MOVE_AND_DONE_BUTTON = new Position(1339, 323, 100, 80, 300, 150);
+    private static final Position MENU_PLAY_BUTTON      = new Position(40, 210, 130, 75, 600, 300);
+    private static final Position FIND_GROUP_BUTTON     = new Position(875, 910, 155, 70, 600, 200);
+//    private static final Position FILTER_GAMES_BUTTON = new Position(1108, 224, 92, 60, 800, 200);
+    private static final Position CREATE_GAME_BUTTON    = new Position(1680, 230, 130, 50, 800, 200);
+    private static final Position START_MATCH_BUTTON    = new Position(872, 883, 100, 60, 600, 200);
+    private static final Position MOVE_AND_DONE_BUTTON  = new Position(1339, 323, 100, 80, 300, 150);
     private static final Position BLUE_TEAM_LOBBY_START = new Position(291, 461, 100, 80, 300, 150);
-    private static final Position CIRCUS_PRESET_1 = new Position(123, 261, 250, 100, 300, 150);
-    private static final Position CHAT_SECTOR = new Position(35, 658, 440, 35, 900, 60);
+    private static final Position CIRCUS_PRESET_1       = new Position(123, 261, 250, 100, 300, 150);
+    private static final Position CHAT_SECTOR           = new Position(35, 658, 440, 35, 900, 60);
 
     private static Mat BufferedImage2Mat(BufferedImage image) throws IOException
     {
@@ -80,8 +81,8 @@ public class Imaging
         return imageScreen(FIND_GROUP_BUTTON, false);
     }
 
-    public static BufferedImage captureFilterGamesButton() throws AWTException, IOException {
-        return imageScreen(FILTER_GAMES_BUTTON, false);
+    public static BufferedImage captureCreateGameButton() throws AWTException, IOException {
+        return imageScreen(CREATE_GAME_BUTTON, false);
     }
 
     public static BufferedImage captureLobbyStartButton() throws AWTException, IOException {
@@ -106,15 +107,13 @@ public class Imaging
         try
         {
             BufferedImage ret;
-
             CApplication.getInstance().openChatIfClosed();
             ret = imageScreen( CHAT_SECTOR, true );
-            Thread.sleep(200);
+            CApplication.getInstance().sleepFor( 200 );
             CApplication.getInstance().closeChatIfOpen();
-
             return ret;
         }
-        catch (AWTException | IOException | InterruptedException e)
+        catch (AWTException | IOException e)
         {
             e.printStackTrace();
             return null;

@@ -25,6 +25,15 @@ public class CApplication
         isChatOpen = newState;
     }
 
+    public void sleepFor(int ms)
+    {
+        try {
+            Thread.sleep( ms );
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void closeChatIfOpen()
     {
         if ( this.isChatOpen )

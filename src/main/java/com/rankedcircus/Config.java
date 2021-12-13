@@ -17,7 +17,9 @@ public class Config
         try
         {
             config = new Config();
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e)
+        {
             e.printStackTrace();
         }
     }
