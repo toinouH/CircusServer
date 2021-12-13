@@ -34,7 +34,7 @@ public class Tess
         Tess.getInstance().setTesseractVar("psm", "3");
         String ret = this.readBufferedImage(input);
         Tess.getInstance().setTesseractVar("psm", "8");
-        return ret;
+        return ret.toLowerCase();
     }
 
     public String readBufferedImage(BufferedImage input)

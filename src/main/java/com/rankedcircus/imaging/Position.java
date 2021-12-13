@@ -1,5 +1,7 @@
 package com.rankedcircus.imaging;
 
+import java.awt.image.BufferedImage;
+
 public class Position
 {
     /**
@@ -21,18 +23,23 @@ public class Position
 
     public Position(int x, int y, int width, int height, int resizeW, int resizeH)
     {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.resizeW = resizeW;
-        this.resizeH = resizeH;
+        this.x          = x;
+        this.y          = y;
+        this.width      = width;
+        this.height     = height;
+        this.resizeW    = resizeW;
+        this.resizeH    = resizeH;
     }
 
-    public int getX() { return this.x; }
-    public int getY() { return this.y; }
-    public int getWidth() { return this.width; }
-    public int getHeight() { return this.height; }
-    public int getResizeW() { return this.resizeW; }
-    public int getResizeH() { return this.resizeH; }
+    public int getX()       { return this.x;        }
+    public int getY()       { return this.y;        }
+    public int getWidth()   { return this.width;    }
+    public int getHeight()  { return this.height;   }
+    public int getResizeW() { return this.resizeW;  }
+    public int getResizeH() { return this.resizeH;  }
+
+    public BufferedImage capture()
+    {
+        return Imaging.imageScreen(this, false);
+    }
 }

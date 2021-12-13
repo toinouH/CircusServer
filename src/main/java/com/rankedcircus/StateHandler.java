@@ -2,26 +2,23 @@ package com.rankedcircus;
 
 import com.rankedcircus.actions.ActionInvitePlayers;
 import com.rankedcircus.actions.ActionSetMap;
-import com.rankedcircus.actions.ActionStartGame;
 import com.rankedcircus.actions.Map;
 import com.rankedcircus.api.Api;
 import com.rankedcircus.api.Match;
 import com.rankedcircus.imaging.Imaging;
 import com.rankedcircus.imaging.Tess;
 
-import java.awt.*;
-import java.io.IOException;
 
 public class StateHandler implements Runnable
 {
-    private CommandHandler commandHandler = new CommandHandler();
-    private Match match = new Match();
-    private boolean hasMovedBot = false;
-    private boolean hasSetPreset = false;
-    private boolean hasInvitedPlayers = false;
-    private boolean hasChangedMap = false;
-    private int currentMatchId = 0;
-    private boolean hasGameStarted = false;
+    private CommandHandler commandHandler   = new CommandHandler();
+    private Match match                     = new Match();
+    private int currentMatchId              = 0;
+    private boolean hasMovedBot             = false;
+    private boolean hasSetPreset            = false;
+    private boolean hasInvitedPlayers       = false;
+    private boolean hasChangedMap           = false;
+    private boolean hasGameStarted          = false;
 
     public void setCurrentMatchId(int matchId)
     {
@@ -74,11 +71,11 @@ public class StateHandler implements Runnable
                 return State.MAIN_LOBBY_MENU_MOVE_SPEC;
             }
 
-            if (!this.hasSetPreset && this.currentMatchId != 0)
-            {
-                this.hasSetPreset = true;
-                return State.MAIN_LOBBY_MENU_SET_PRESET;
-            }
+           if (!this.hasSetPreset && this.currentMatchId != 0)
+           {
+               this.hasSetPreset = true;
+               return State.MAIN_LOBBY_MENU_SET_PRESET;
+           }
 
             if (!this.hasChangedMap && this.currentMatchId != 0)
             {
@@ -114,16 +111,13 @@ public class StateHandler implements Runnable
     @Override
     public void run()
     {
-        // I don't like this and will change how this is handled. It's messy but I'm tired.
-        // noinspection InfiniteLoopStatement
         for ( ;; )
         {
             //--------------------------------------------------
             // State-specific logic.
             State currentState = this.getCurrentState();
 
-            if (currentState == null)
-                continue;
+            if (currentState == null)   continue;
 
             if (currentState == State.MAIN_LOBBY_INVITE_PLAYERS && hasMovedBot)
             {
@@ -147,8 +141,8 @@ public class StateHandler implements Runnable
             currentState.goNextState();
 
             // Perform imaging/read of chat sector.
-            if ( currentState == State.IN_GAME )
-                commandHandler.intake(Tess.getInstance().readSingleLine(Imaging.captureChatSector()));
+            if (currentState == State.IN_GAME)
+                    commandHandler.intake(Tess.getInstance().readSingleLine(Imaging.captureChatSector()));
 
             CApplication.getInstance().sleepFor( 100 );
         }

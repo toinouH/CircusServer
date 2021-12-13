@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ClientHandler implements Runnable {
+public class ClientHandler implements Runnable
+{
     private final BufferedReader input;
     private final PrintWriter output;
     private final MatchServer serverReference;

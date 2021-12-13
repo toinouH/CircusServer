@@ -1,6 +1,7 @@
 package com.rankedcircus;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import static java.awt.event.KeyEvent.getExtendedKeyCodeForChar;
 
@@ -35,6 +36,23 @@ public class Keyboard
         SRobot.getRobot().keyRelease(key);
     }
 
+    public static void sendSequentialKeys(int[] keys, int delay)
+    {
+        for (int i = 0; i < keys.length; i++)
+        {
+            sendKeyEvent(keys[i]);
+            if ( delay > 0 )
+                CApplication.getInstance().sleepFor( delay );
+        }
+    }
+
+    public static void sendChat(String input)
+    {
+        CApplication.getInstance().openChatIfClosed();
+        sendString(input);
+        CApplication.getInstance().closeChatIfOpen();
+    }
+
     private static void sendModifiedKey(char key)
     {
         SRobot.getRobot().keyPress(KeyEvent.VK_SHIFT);
@@ -55,7 +73,7 @@ public class Keyboard
     public static void sendString(String intake)
     {
         // Robot type go fast like speedracer~!!!!
-        SRobot.getRobot().setAutoDelay( 15 );
+        SRobot.getRobot().setAutoDelay( 10 );
 
         for ( char c : intake.toCharArray() )
         {

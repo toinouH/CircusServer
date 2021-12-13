@@ -1,5 +1,6 @@
 package com.rankedcircus;
 
+import com.rankedcircus.overwatchclient.ClientFunctions;
 import com.rankedcircus.server.MatchServer;
 import org.opencv.core.Core;
 import java.io.IOException;
@@ -10,6 +11,8 @@ public class Main
     {
         // Load the OpenCV dll
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+        ClientFunctions.ensureBorderlessDisplay();
 
         StateHandler stateHandler = new StateHandler();
         Thread stateHandlerThread = new Thread(stateHandler);

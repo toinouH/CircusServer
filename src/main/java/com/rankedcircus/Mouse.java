@@ -35,6 +35,7 @@ public class Mouse
     {
         this.snapMove(x, y);
         this.click();
+        CApplication.getInstance().sleepFor( 50 );
     }
 
     public static Mouse getInstance()

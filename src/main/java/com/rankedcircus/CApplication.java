@@ -1,5 +1,8 @@
 package com.rankedcircus;
 
+import com.rankedcircus.imaging.Position;
+import com.rankedcircus.imaging.Tess;
+
 import java.awt.event.KeyEvent;
 
 // Global class-ish
@@ -48,6 +51,11 @@ public class CApplication
         {
             this.setChatState(true);
         }
+    }
+
+    public boolean sectorContainsString(Position captureSector, String isContained)
+    {
+        return Tess.getInstance().readSingleLine(captureSector.capture()).contains(isContained);
     }
 
 }

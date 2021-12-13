@@ -1,0 +1,6 @@
+Recognition bugs:
+    - Menu background of map Paris can cause OCR issues with the play button.
+        - Fix is probably just resizing the width prior to OCR to be a bit more wide.
+
+Notes for Carter
+    - Remember to go through and make sure that sendSequentialKeys and functions alike are being used wherever they should be.

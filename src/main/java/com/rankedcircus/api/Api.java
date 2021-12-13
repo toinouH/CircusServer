@@ -31,11 +31,6 @@ public class Api
     private final OkHttpClient httpClient = new OkHttpClient();
     private String apiUrl = Config.getConfig().read("circus.api_prod");
 
-    public Api()
-    {
-        System.out.println("Api constructor called.");
-    }
-
     public void setApiurl(String newUrl)    {   this.apiUrl = newUrl;   }
     public String getApiUrl()               {   return this.apiUrl;     }
 

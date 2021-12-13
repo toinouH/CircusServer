@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 
 public class Imaging
@@ -29,6 +28,13 @@ public class Imaging
     private static final Position BLUE_TEAM_LOBBY_START = new Position(291, 461, 100, 80, 300, 150);
     private static final Position CIRCUS_PRESET_1       = new Position(123, 261, 250, 100, 300, 150);
     private static final Position CHAT_SECTOR           = new Position(35, 658, 440, 35, 900, 60);
+
+    //-------------------------------------------------------------------------
+    // Publicly accessible positions are unrelated to any Action children.
+    // - Most will be used in places like ClientFunctions.java
+    //-------------------------------------------------------------------------
+    public static final Position SHOW_LOBBY            = new Position(1110, 500, 225, 35, 600, 60);
+    public static final Position DISPLAY_MODE          = new Position(1185, 190, 400, 40, 800, 60);
 
     private static Mat BufferedImage2Mat(BufferedImage image)
     {
@@ -55,7 +61,7 @@ public class Imaging
         }
     }
 
-    private static BufferedImage imageScreen(Position position, boolean useGray )
+    public static BufferedImage imageScreen(Position position, boolean useGray )
     {
         // Construct rectangle of dimensions using position param
         Rectangle screenRect = new Rectangle(
@@ -109,6 +115,14 @@ public class Imaging
 
     public static BufferedImage captureCircusPreset() {
         return imageScreen(CIRCUS_PRESET_1, false);
+    }
+
+    public static BufferedImage captureDisplayMode() {
+        return imageScreen(DISPLAY_MODE, false);
+    }
+
+    public static BufferedImage captureShowLobby() {
+        return imageScreen(SHOW_LOBBY, false);
     }
 
     // TODO: Think about whether or not I want to throw exceptions on the function or include try/catch.
