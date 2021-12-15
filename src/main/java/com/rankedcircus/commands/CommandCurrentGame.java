@@ -18,7 +18,7 @@ public class CommandCurrentGame extends Command
     public void execute()
     {
         Log.CLog("CurrentGame","Received and executing command.");
-        Match currentMatch = Api.getInstance().getMatch(3);
+        Match currentMatch = Api.getInstance().getMatch(4);
         CApplication.getInstance().openChatIfClosed();
         Keyboard.sendString("Current match started at " + currentMatch.getTimestamp());
         Keyboard.sendString("    Current map " + currentMatch.getMap());

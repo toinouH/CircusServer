@@ -6,7 +6,6 @@ import java.awt.event.InputEvent;
 public class Mouse
 {
     private static Mouse mouse; // Singleton instance
-    private static Robot robot;
 
     // Lol java
     static

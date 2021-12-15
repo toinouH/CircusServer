@@ -8,6 +8,7 @@ public class CommandHandler
     public Command commandCurrentGame   = new CommandCurrentGame();
     public Command commandCurrentTeams  = new CommandCurrentTeams();
     public Command commandRestartMatch  = new CommandRestartMatch();
+    public Command commandSayHi         = new CommandSayHi();
 
     public void intake(String input)
     {
@@ -35,6 +36,10 @@ public class CommandHandler
         else if ( input.contains(prefix + "restart") )
         {
             this.commandRestartMatch.execute();
+        }
+        else if ( input.contains(prefix + "hi") )
+        {
+            this.commandSayHi.execute();
         }
     }
 }

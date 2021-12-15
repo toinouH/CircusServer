@@ -16,7 +16,7 @@ public class CommandCurrentTeams extends Command
     public void execute()
     {
         Log.CLog("CurrentTeams", "Received command and executing.");
-        Match currentMatch = Api.getInstance().getMatch(3);
+        Match currentMatch = Api.getInstance().getMatch(4);
 
         Keyboard.sendChat("Blue team players are");
 
